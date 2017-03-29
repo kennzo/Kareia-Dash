@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Kareia-Dashboard
                 </div>
 
                 <div class="links">
