@@ -18,3 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+/**
+ * Properties routing group
+ */
+Route::group(['prefix' => 'properties'], function() {
+    Route::get('/', [
+        'as' => 'properties',
+        'uses' => 'PropertiesController@index',
+    ]);
+});

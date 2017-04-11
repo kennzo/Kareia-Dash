@@ -11,6 +11,15 @@
                     You are logged in!
                 </div>
             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Properties</div>
+
+                <div class="panel-body">
+                    <a href="{{ route('properties') }}">Go here for your properties.</a>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
