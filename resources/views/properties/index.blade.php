@@ -9,7 +9,12 @@
                     <div class="panel-heading">Property List | +</div>
                     <div class="panel-body">
                         @foreach($properties as $property)
-                            <p>{{ $property->streetAddress }}, {{ $property->city }}, {{ $property->stateId }}, {{ $property->zip }}</p>
+                            {{
+                                link_to_route(
+                                    'property',
+                                    $property->streetAddress . " " . $property->zip,
+                                    ['id' => $property->id]
+                                ) }}<br/>
                         @endforeach
                     </div>
                 </div>

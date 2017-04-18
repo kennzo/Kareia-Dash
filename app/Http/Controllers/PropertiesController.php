@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Property;
+use App\Models\Property\Property;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 
