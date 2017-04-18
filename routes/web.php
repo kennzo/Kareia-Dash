@@ -27,4 +27,9 @@ Route::group(['prefix' => 'properties'], function() {
         'as' => 'properties',
         'uses' => 'PropertiesController@index',
     ]);
+
+    Route::get('/{id}', [
+        'as' => 'property',
+        'uses' => 'PropertiesController@property'
+    ]);
 });
