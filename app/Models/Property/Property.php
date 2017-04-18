@@ -4,12 +4,14 @@ namespace App\Models\Property;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laracasts\Presenter\PresentableTrait;
 
 class Property extends Model
 {
-    // todo: Should I use Notifiable?
-
     use SoftDeletes;
+    use PresentableTrait;
+
+    protected $presenter = 'App\Models\Property\PropertyPresenter';
 
     /**
      * The attributes that are mass assignable.

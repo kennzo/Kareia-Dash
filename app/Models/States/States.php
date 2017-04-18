@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class States extends Model
 {
-    // todo: Find out about presenter for this
-
     /**
      * The attributes that are mass assignable.
      *

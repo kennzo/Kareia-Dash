@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ $property->streetAddress }}</div>
                     <div class="panel-body">
-                        <p>{{ $property->streetAddress }}, {{ $property->city }}, {{ $property->stateId }}, {{ $property->zip }}</p>
+                        <p>{{ $property->present()->fullAddress }}</p>
                     </div>
                 </div>
             </div>

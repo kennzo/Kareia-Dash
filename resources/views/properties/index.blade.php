@@ -12,7 +12,7 @@
                             {{
                                 link_to_route(
                                     'property',
-                                    $property->streetAddress . " " . $property->zip,
+                                    $property->present()->fullAddress,
                                     ['id' => $property->id]
                                 ) }}<br/>
                         @endforeach
