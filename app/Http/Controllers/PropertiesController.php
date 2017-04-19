@@ -40,6 +40,10 @@ class PropertiesController extends Controller
     {
         $property = Property::find($id);
 
-        return view("properties.property", compact('property'));
+        // todo: Investigate what's up with foreign keys here and how to access their data
+        $state = Property::find(1)->state();
+//        dd($state);
+
+        return view("properties.property", compact('property', 'state'));
     }
 }

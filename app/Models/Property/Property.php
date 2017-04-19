@@ -19,6 +19,14 @@ class Property extends Model
      * @var array
      */
     protected $fillable = [
-        'streetAddress', 'city', 'stateId', 'zip'
+        'street_address', 'city', 'state_id', 'zip'
     ];
+
+    /**
+     * Gets the state associated with this property
+     */
+    public function state()
+    {
+        return $this->hasOne('App\Models\States\States', 'state_id', 'id');
+    }
 }

@@ -18,7 +18,11 @@ class CreateStatesTable extends Migration
             $table->string('abbreviation');
         });
 
-        // todo: Create foreign key for properties to states
+        Schema::table('properties', function (Blueprint $table) {
+            $table->foreign('state_id')
+                ->references('id')
+                ->on('states');
+        });
     }
 
     /**
@@ -28,6 +32,10 @@ class CreateStatesTable extends Migration
      */
     public function down()
     {
+        Schema::table('properties', function (Blueprint $table) {
+            $table->dropForeign('properties_state_id_foreign');
+        });
+
         Schema::dropIfExists('states');
     }
 }

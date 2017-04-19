@@ -14,9 +14,9 @@ class CreatePropertiesTable extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('streetAddress');
+            $table->string('street_address');
             $table->string('city');
-            $table->integer('stateId');
+            $table->integer('state_id');
             $table->string('zip');
             $table->timestamps();
             $table->softDeletes();

@@ -26,8 +26,8 @@ class PropertyPresenter extends Presenter
      */
     public function fullAddress()
     {
-        $state = States::find($this->stateId);
+        $state = States::find($this->state_id);
 
-        return $this->streetAddress . ', ' . $this->city . ', ' . $state->name . ', ' . $this->zip;
+        return $this->street_address . ', ' . $this->city . ', ' . $state->name . ', ' . $this->zip;
     }
 }
