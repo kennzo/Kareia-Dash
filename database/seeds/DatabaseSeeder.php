@@ -11,7 +11,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsersTableSeeder::class);
-        $this->call(PropertiesTableSeeder::class);
+        if (App::environment() == 'production') {
+            throw new RuntimeException('Seeders should never run in production!');
+        }
+
+        if (App::environment() == 'local' || App::environment() == 'staging') {
+            $this->truncateTables();
+            $this->call(UsersTableSeeder::class);
+            $this->call(PropertiesTableSeeder::class);
+        }
+
+        if (App::environment() == 'testing') {
+            $this->truncateTables();
+            $this->call(UsersTableSeeder::class);
+            $this->call(PropertiesTableSeeder::class);
+        }
+
+    }
+
+    /**
+     * Empty the tables
+     */
+    public function truncateTables()
+    {
+        $tables = [
+            'properties',
+            'users',
+        ];
+
+        DB::unprepared('TRUNCATE TABLE ' . implode(',', $tables) . ' RESTART IDENTITY CASCADE');
     }
 }
