@@ -9,9 +9,15 @@
                     <div class="panel-heading">Property List | +</div>
                     <div class="panel-body">
                         @foreach($properties as $property)
-                            123 Main St., Houston, TX 77002
+                            {{
+                                link_to_route(
+                                    'property',
+                                    $property->present()->fullAddress,
+                                    ['id' => $property->id]
+                                ) }}<br/>
                         @endforeach
                     </div>
+                </div>
             </div>
         </div>
     </div>
