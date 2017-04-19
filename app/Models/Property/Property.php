@@ -23,10 +23,21 @@ class Property extends Model
     ];
 
     /**
+     * Property constructor.
+     *
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+    }
+
+    /**
      * Gets the state associated with this property
      */
     public function state()
     {
+        // todo: Figure out getting foreign key elements
         return $this->hasOne('App\Models\States\States', 'state_id', 'id');
     }
 }
