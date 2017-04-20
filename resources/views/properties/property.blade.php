@@ -8,6 +8,7 @@
                     <div class="panel-heading">{{ $property->streetAddress }}</div>
                     <div class="panel-body">
                         <p>{{ $property->present()->fullAddress }}</p>
+                        <p>{{ $property->state->name }}</p>
                     </div>
                 </div>
             </div>
