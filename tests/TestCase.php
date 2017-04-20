@@ -11,8 +11,7 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
-
-    use MakesHttpRequests;
+//    use MakesHttpRequests;
 
     /**
      * Specifies which `Seeder` class will be used by each Test Case.
