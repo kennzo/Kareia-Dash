@@ -5,7 +5,9 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ $property->streetAddress }}</div>
+                    <div class="panel-heading">
+                        {{ link_to_route('properties', "Back to All Properties") }}
+                    </div>
                     <div class="panel-body">
                         <p>{{ $property->present()->fullAddress }}</p>
                         <p>{{ $property->state->name }}</p>
