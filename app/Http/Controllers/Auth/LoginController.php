@@ -36,4 +36,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
+
+    // todo: Make separate layout for non-navigation pages
 }
