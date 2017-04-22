@@ -3,6 +3,7 @@
 namespace App\Models\Property;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laracasts\Presenter\PresentableTrait;
 
@@ -19,7 +20,17 @@ class Property extends Model
      * @var array
      */
     protected $fillable = [
-        'street_address', 'city', 'state_id', 'zip'
+        'street_address',
+        'city',
+        'state_id',
+        'zip',
+        'bedrooms',
+        'bathrooms',
+        'garages',
+        'year_built',
+        'living_square_footage',
+        'lot_square_footage',
+        'neighborhood',
     ];
 
     /**
@@ -38,5 +49,15 @@ class Property extends Model
     public function state()
     {
         return $this->belongsTo('App\Models\States\States');
+    }
+
+    /**
+     * Foreign key for user.
+     *
+     * @return HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne('App\User');
     }
 }
