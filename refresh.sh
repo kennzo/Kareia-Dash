@@ -125,6 +125,13 @@ echo -n "Removing compiled object cache..."
 echo "done!"
 
 ##
+# Clear cache
+##
+echo "Clearing the config..."
+php artisan cache:clear
+echo "done!"
+
+##
 # Create doctrine proxies
 ##
 
