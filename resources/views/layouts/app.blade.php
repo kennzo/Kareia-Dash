@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/flashMessage.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -79,6 +80,10 @@
                 </div>
             </div>
         </nav>
+
+        @include('_shared.errors')
+
+        @include('_shared.message')
 
         @yield('content')
     </div>

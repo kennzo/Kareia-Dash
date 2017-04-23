@@ -6,7 +6,14 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading"> Property List | Create Property</div>
+                    <div class="panel-heading">
+                        {{
+                            link_to_route(
+                                'properties.create',
+                                'Create Property'
+                            )
+                        }}
+                    </div>
                     <div class="panel-body">
                         @foreach($properties as $property)
                             {{
