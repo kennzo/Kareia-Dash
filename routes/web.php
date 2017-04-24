@@ -42,7 +42,7 @@ Route::group(['prefix' => 'properties'], function() {
 /**
  * Property group - Handles individual property routes
  */
-Route::group(['prefix' => 'property'], function() {
+Route::group(['prefix' => 'property', 'middleware' => 'property'], function() {
     Route::get('/{id}', [
         'as' => 'property',
         'uses' => 'PropertiesController@property',

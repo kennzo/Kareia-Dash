@@ -26,7 +26,9 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        $properties = Property::all();
+        $properties = Property::where('user_id', Auth::user()->getAuthIdentifier())
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view("properties.index", compact('properties'));
     }
