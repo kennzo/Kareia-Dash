@@ -1,0 +1,25 @@
+.GeneralMessage {
+    border: 2px solid #FFCA6F;
+    background-color: #FFF6DF;
+    padding: 15px;
+}
+
+.SuccessMessage {
+    border: 2px solid #35794B;
+    background-color: #E9F4E6;
+    padding: 15px;
+}
+
+.ErrorMessage {
+    border: 2px solid #CF3733;
+    background-color: #FFEFEF;
+    padding: 15px;
+}
+
+.ErrorMessage h1, .ErrorMessage strong {
+    color: #CF3733;
+}
+
+.SuccessMessage a, .GeneralMessage a, .ErrorMessage a {
+    color: blue;
+}

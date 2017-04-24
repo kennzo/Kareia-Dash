@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 /**
- * Properties routing group
+ * Properties routing group - handling all properties routes (get all, and add them)
  */
 Route::group(['prefix' => 'properties'], function() {
     Route::get('/', [
@@ -28,8 +28,23 @@ Route::group(['prefix' => 'properties'], function() {
         'uses' => 'PropertiesController@index',
     ]);
 
+    Route::get('/create', [
+        'as' => 'properties.create',
+        'uses' => 'PropertiesController@create',
+    ]);
+
+    Route::post('/create', [
+        'as' => 'properties.store',
+        'uses' => 'PropertiesController@store',
+    ]);
+});
+
+/**
+ * Property group - Handles individual property routes
+ */
+Route::group(['prefix' => 'property'], function() {
     Route::get('/{id}', [
         'as' => 'property',
-        'uses' => 'PropertiesController@property'
+        'uses' => 'PropertiesController@property',
     ]);
 });

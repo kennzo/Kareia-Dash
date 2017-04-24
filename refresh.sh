@@ -145,6 +145,9 @@ echo "done!"
 echo "Migrating and seeding tables..."
 php artisan migrate --seed
 
+echo "Migrating and seeding tables for testing database..."
+php artisan migrate --env=testing --seed
+
 echo "Migrating and seeding tables for testing..."
 php artisan config:clear
 php artisan migrate --env=testing --seed
