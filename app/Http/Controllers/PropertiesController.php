@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property\Property;
+use App\Http\Requests\Property as PropertyValidator;
 use Auth;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
-use Request;
 
 class PropertiesController extends Controller
 {
@@ -57,22 +57,26 @@ class PropertiesController extends Controller
 
     /**
      * Stores the view for creating a property (POST)
+     *
+     * @param PropertyValidator $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(PropertyValidator $request)
     {
         $property = new Property();
         $property->setAttribute('user_id', Auth::user()->getAuthIdentifier());
-        $property->setAttribute('street_address', Request::input('street_address'));
-        $property->setAttribute('city', Request::input('city'));
-        $property->setAttribute('state_id', Request::input('state_id'));
-        $property->setAttribute('zip', Request::input('zip'));
-        $property->setAttribute('bedrooms', Request::input('bedrooms'));
-        $property->setAttribute('bathrooms', Request::input('bathrooms'));
-        $property->setAttribute('garages', Request::input('garages'));
-        $property->setAttribute('year_built', Request::input('year_built'));
-        $property->setAttribute('living_square_footage', Request::input('living_square_footage'));
-        $property->setAttribute('lot_square_footage', Request::input('lot_square_footage'));
-        $property->setAttribute('neighborhood', Request::input('neighborhood'));
+        $property->setAttribute('street_address', $request['street_address']);
+        $property->setAttribute('city', $request['city']);
+        $property->setAttribute('state_id', $request['state_id']);
+        $property->setAttribute('zip', $request['zip']);
+        $property->setAttribute('bedrooms', $request['bedrooms']);
+        $property->setAttribute('bathrooms', $request['bathrooms']);
+        $property->setAttribute('garages', $request['garages']);
+        $property->setAttribute('year_built', $request['year_built']);
+        $property->setAttribute('living_square_footage', $request['living_square_footage']);
+        $property->setAttribute('lot_square_footage', $request['lot_square_footage']);
+        $property->setAttribute('neighborhood', $request['neighborhood']);
 
         $property->save();
 

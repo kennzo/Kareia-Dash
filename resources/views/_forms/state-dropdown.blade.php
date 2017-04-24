@@ -1,6 +1,6 @@
 {!!
     Form::select('state_id', [
-        0 => 'Choose one...',
+        '' => 'Choose one...',
         1 =>'Alabama',
         2 =>'Alaska',
         3 =>'Arizona',
