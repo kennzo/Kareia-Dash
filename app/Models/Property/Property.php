@@ -20,6 +20,7 @@ class Property extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'street_address',
         'city',
         'state_id',

@@ -14,19 +14,19 @@
                         ]) !!}
                         <table cellpadding="5" cellspacing="0" border="0" class="vertical">
                             <tr>
-                                <th>Street Address:</th>
+                                <th>Street Address *:</th>
                                 <td>{!! Form::text('street_address') !!}</td>
                             </tr>
                             <tr>
-                                <th>City:</th>
+                                <th>City *:</th>
                                 <td>{!! Form::text('city') !!}</td>
                             </tr>
                             <tr>
-                                <th>State:</th>
+                                <th>State *:</th>
                                 <td>@include('_forms.state-dropdown')</td>
                             </tr>
                             <tr>
-                                <th>Zip code:</th>
+                                <th>Zip code *:</th>
                                 <td>{!! Form::text('zip') !!}</td>
                             </tr>
                             <tr>

@@ -20,5 +20,48 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
      */
     public function __construct()
     {
+        $this->truncateTables();
+
+        $seeder = App::make(DatabaseSeeder::class);
+        $seeder->run();
+    }
+
+//    public function takeScreenshotAfterFailedStep()
+//    {
+//        $this->getSession()->getScreenshot()
+//    }
+
+    /**
+     * Logs a non-admin user in and takes them to the home/dashboard page
+     *
+     * @Given I am logged in and at the dashboard
+     */
+    public function logged_in_at_dashboard()
+    {
+        // Login using non-admin account
+        Auth::loginUsingId(2);
+
+        $this->getSession()->visit('/home');
+
+        $this->assertPageAddress('/home');
+    }
+
+    /**
+     * =========================================================================
+     * =                  GENERIC FUNCTIONS                                    =
+     * =========================================================================
+     */
+
+    /**
+     * Empty the tables
+     */
+    public function truncateTables()
+    {
+        $tables = [
+            'properties',
+            'users',
+        ];
+
+        DB::unprepared('TRUNCATE TABLE ' . implode(',', $tables) . ' RESTART IDENTITY CASCADE');
     }
 }

@@ -29,7 +29,6 @@ class PropertiesTableSeeder extends Seeder
             'living_square_footage' => 1200,
             'lot_square_footage' => 5000,
             'neighborhood' => 'Silverdale',
-
         ]);
         $property1->save();
 
