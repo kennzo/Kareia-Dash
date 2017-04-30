@@ -12,13 +12,13 @@ class CreateEstimatesLookupTable extends Migration
      */
     public function up()
     {
-        Schema::create('estimates_lookup', function (Blueprint $table) {
+        Schema::create('estimate_lookups', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('property_id')->index('estimates_lookup_property_id');
+            $table->integer('property_id')->index('estimate_lookups_property_id');
                 $table->foreign('property_id')->references('id')->on('properties');
-            $table->integer('estimate_types_id')->index('estimates_lookup_estimate_types_id');
-                $table->foreign('estimate_types_id')->references('id')->on('estimate_types');
-            $table->integer('estimate_id')->index('estimates_lookup_estimates_id');
+            $table->integer('estimate_type_id')->index('estimate_lookups_estimate_type_id');
+                $table->foreign('estimate_type_id')->references('id')->on('estimate_types');
+            $table->integer('estimate_id')->index('estimate_lookups_estimate_id');
         });
     }
 
@@ -29,7 +29,7 @@ class CreateEstimatesLookupTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estimates_lookup');
+        Schema::dropIfExists('estimate_lookups');
     }
 }
 

@@ -14,6 +14,8 @@ class Property extends Model
 
     protected $presenter = 'App\Models\Property\PropertyPresenter';
 
+    protected $table = "properties";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -49,7 +51,7 @@ class Property extends Model
      */
     public function state()
     {
-        return $this->belongsTo('App\Models\States\States');
+        return $this->belongsTo('App\Models\States\State');
     }
 
     /**

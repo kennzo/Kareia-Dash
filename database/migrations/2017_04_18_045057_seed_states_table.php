@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\States\States;
+use App\Models\State\State;
 use Illuminate\Database\Migrations\Migration;
 
 class SeedStatesTable extends Migration
@@ -80,8 +80,8 @@ STATES;
         foreach (explode("\n", $statesCsv) as $line) {
             list($id, $name, $abbreviation) = array_map('trim', str_getcsv($line));
 
-            /** @var States $state */
-            $state = new States;
+            /** @var State $state */
+            $state = new State;
 
             $state->id = $id;
             $state->name = $name;
