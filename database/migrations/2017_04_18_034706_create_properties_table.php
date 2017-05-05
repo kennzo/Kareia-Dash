@@ -15,7 +15,7 @@ class CreatePropertiesTable extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index('properties_user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+                $table->foreign('user_id')->references('id')->on('users');
             $table->string('street_address');
             $table->string('city');
             $table->integer('state_id');

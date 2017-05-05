@@ -63,4 +63,25 @@ class Property extends Model
     {
         return $this->hasOne('App\User');
     }
+
+    /**
+     * Gets an array of all estimates that are related to the property
+     */
+    public function estimates()
+    {
+//        return $this->hasMany('App\Models\Estimates\EstimateLookup\EstimateLookup');
+        // todo: Get all elemtns and add to an array
+    }
+
+    /**
+     * Gets all the estimate lookup elements related to this property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rentalEstimates()
+    {
+        return $this->hasMany('App\Models\Estimates\RentalEstimate\RentalEstimate');
+    }
+
+    // todo: Add function to fetch rehab estimates
 }
