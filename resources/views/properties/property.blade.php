@@ -9,8 +9,44 @@
                         {{ link_to_route('properties', "Back to All Properties") }}
                     </div>
                     <div class="panel-body">
-                        <p>{{ $property->present()->fullAddress }}</p>
-                        <p>{{ $property->state->name }}</p>
+                        <h3>Property Information:</h3>
+                        <table class="table-bordered">
+                            <tr>
+                                <td>Property Address:</td>
+                                <td>{{ $property->present()->fullAddress }}</td>
+                            </tr>
+                            <tr>
+                                <td>Bedrooms:</td>
+                                <td>{{ $property->bedrooms }}</td>
+                            </tr>
+                            <tr>
+                                <td>Bathrooms:</td>
+                                <td>{{ $property->bathrooms }}</td>
+                            </tr>
+                            <tr>
+                                <td>Garages:</td>
+                                <td>{{ $property->garages }}</td>
+                            </tr>
+                            <tr>
+                                <td>Garages:</td>
+                                <td>{{ $property->garages }}</td>
+                            </tr>
+                            <tr>
+                                <td>Living square footage:</td>
+                                <td>{{ $property->living_square_footage }}</td>
+                            </tr>
+                            <tr>
+                                <td>Lot size:</td>
+                                <td>{{ $property->lot_square_footage }}</td>
+                            </tr>
+                            <tr>
+                                <td>Neighborhood:</td>
+                                <td>{{ $property->neighborhood }}</td>
+                            </tr>
+
+                            {{--<p>{{ $property->state->name }}</p>--}}
+
+                        </table>
                     </div>
                 </div>
             </div>

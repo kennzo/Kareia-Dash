@@ -19,12 +19,14 @@ class DatabaseSeeder extends Seeder
             $this->truncateTables();
             $this->call(UsersTableSeeder::class);
             $this->call(PropertiesTableSeeder::class);
+            $this->call(RentalEstimatesTableSeeder::class);
         }
 
         if (App::environment() == 'testing') {
             $this->truncateTables();
             $this->call(UsersTableSeeder::class);
             $this->call(PropertiesTableSeeder::class);
+            $this->call(RentalEstimatesTableSeeder::class);
         }
 
     }

@@ -1,9 +1,8 @@
 <?php
 
-use App\Models\Property\Property;
 use Illuminate\Database\Seeder;
 
-class PropertiesTableSeeder extends Seeder
+class RentalEstimatesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +11,6 @@ class PropertiesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Property\Property::class, 10)->create();
+        factory(App\Models\Estimates\RentalEstimate\RentalEstimate::class, 10)->create();
     }
 }

@@ -6,7 +6,7 @@
 
 namespace App\Models\Property;
 
-use App\Models\States\States;
+use App\Models\State\State;
 use Laracasts\Presenter\Presenter;
 
 /**
@@ -26,7 +26,7 @@ class PropertyPresenter extends Presenter
      */
     public function fullAddress()
     {
-        $state = States::find($this->state_id);
+        $state = State::find($this->state_id);
 
         return $this->street_address . ', ' . $this->city . ', ' . $state->name . ', ' . $this->zip;
     }

@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Gets all properties that user owns.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function properties()
+    {
+        return $this->hasMany('App\Models\Property\Property');
+    }
 }
