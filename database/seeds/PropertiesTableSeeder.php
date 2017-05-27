@@ -12,10 +12,6 @@ class PropertiesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Property\Property::class, 3)->create([
-            'user_id' => 3,
-        ]);
-
         factory(App\Models\Property\Property::class, 10)->create();
     }
 }

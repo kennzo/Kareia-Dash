@@ -70,7 +70,7 @@ class Property extends Model
     public function estimates()
     {
 //        return $this->hasMany('App\Models\Estimates\EstimateLookup\EstimateLookup');
-        // todo: Get all elemtns and add to an array
+        // todo: Get all elements and add to an array
     }
 
     /**

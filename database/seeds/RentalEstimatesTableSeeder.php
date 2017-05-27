@@ -11,6 +11,6 @@ class RentalEstimatesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Estimates\RentalEstimate\RentalEstimate::class, 13)->create();
+        factory(App\Models\Estimates\RentalEstimate\RentalEstimate::class, 10)->create();
     }
 }
