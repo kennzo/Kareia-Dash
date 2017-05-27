@@ -17,10 +17,8 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('secret'),
         ]);
 
-        DB::table('users')->insert([
-            'name' => str_random(10),
-            'email' => 'john@example.com',
-            'password' => bcrypt('secret'),
+        factory(App\User::class, 4)->create([
+            'password' => 'secret',
         ]);
     }
 }
