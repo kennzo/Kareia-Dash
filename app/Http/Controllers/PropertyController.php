@@ -3,26 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property\Property;
-use App\Http\Requests\Property as PropertyValidator;
 use Auth;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\View\View;
+use Illuminate\Http\Request;
 
-class PropertiesController extends Controller
+class PropertyController extends Controller
 {
-    /*
+    /**
      * Ensures that only authorized users may enter this route
-     */
+     **/
     public function __construct()
     {
         $this->middleware('auth');
     }
 
     /**
-     * Gets all the properties.
-     * This will eventually have the userId passed in so that you only fetch the properties for a user.
+     * Display a listing of the resource.
      *
-     * @return Factory|View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -34,23 +31,9 @@ class PropertiesController extends Controller
     }
 
     /**
-     * Gets the individual property for viewing
+     * Show the form for creating a new resource.
      *
-     * @param $id
-     *
-     * @return Factory|View
-     */
-    public function property($id)
-    {
-        $property = Property::find($id);
-
-        return view("properties.property", compact('property'));
-    }
-
-    /**
-     * Fetch the view for creating a property
-     *
-     * @return Factory|View
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -58,13 +41,12 @@ class PropertiesController extends Controller
     }
 
     /**
-     * Stores the view for creating a property (POST)
+     * Store a newly created resource in storage.
      *
-     * @param PropertyValidator $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store(PropertyValidator $request)
+    public function store(Request $request)
     {
         $property = new Property();
         $property->setAttribute('user_id', Auth::user()->getAuthIdentifier());
@@ -82,6 +64,52 @@ class PropertiesController extends Controller
 
         $property->save();
 
-        return redirect()->route('properties')->with('message', 'Property successfully added!');
+        return redirect()->route('properties')->with('message', 'Property successfully added!');    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $property = Property::find($id);
+
+        return view("properties.property", compact('property'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

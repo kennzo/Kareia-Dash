@@ -28,8 +28,8 @@
                                 <td>{{ $property->garages }}</td>
                             </tr>
                             <tr>
-                                <td>Garages:</td>
-                                <td>{{ $property->garages }}</td>
+                                <td>Year built:</td>
+                                <td>{{ $property->year_built }}</td>
                             </tr>
                             <tr>
                                 <td>Living square footage:</td>
@@ -43,9 +43,6 @@
                                 <td>Neighborhood:</td>
                                 <td>{{ $property->neighborhood }}</td>
                             </tr>
-
-                            {{--<p>{{ $property->state->name }}</p>--}}
-
                         </table>
                     </div>
                 </div>

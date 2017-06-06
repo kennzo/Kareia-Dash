@@ -25,17 +25,17 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix' => 'properties'], function() {
     Route::get('/', [
         'as' => 'properties',
-        'uses' => 'PropertiesController@index',
+        'uses' => 'PropertyController@index',
     ]);
 
     Route::get('/create', [
         'as' => 'properties.create',
-        'uses' => 'PropertiesController@create',
+        'uses' => 'PropertyController@create',
     ]);
 
     Route::post('/create', [
         'as' => 'properties.store',
-        'uses' => 'PropertiesController@store',
+        'uses' => 'PropertyController@store',
     ]);
 });
 
@@ -45,6 +45,6 @@ Route::group(['prefix' => 'properties'], function() {
 Route::group(['prefix' => 'property', 'middleware' => 'property'], function() {
     Route::get('/{id}', [
         'as' => 'property',
-        'uses' => 'PropertiesController@property',
+        'uses' => 'PropertyController@show',
     ]);
 });
