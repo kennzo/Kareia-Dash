@@ -47,4 +47,15 @@ Route::group(['prefix' => 'property', 'middleware' => 'property'], function() {
         'as' => 'property',
         'uses' => 'PropertyController@show',
     ]);
+
+    Route::get('/{id}/edit', [
+        'as' => 'property.edit',
+        'uses' => 'PropertyController@edit',
+    ]);
+
+    Route::patch('/{id}/update', [
+        'as' => 'property.update',
+        'uses' => 'PropertyController@update',
+    ]);
+
 });

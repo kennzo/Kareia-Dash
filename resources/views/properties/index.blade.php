@@ -20,7 +20,16 @@
                                     'property',
                                     $property->present()->fullAddress,
                                     ['id' => $property->id]
-                                ) }}<br/>
+                                )
+                            }} | (
+                            {{
+                                link_to_route(
+                                    'property.edit',
+                                    'Edit',
+                                    ['property' => $property]
+                                )
+                            }} )
+                            <br/>
                         @endforeach
                     </div>
                 </div>
