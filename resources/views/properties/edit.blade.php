@@ -19,7 +19,7 @@
                                         $property->id
                                     ],
                                 ]) !!}
-                            @include('properties.form', ['submitButtonText' => 'Edit Property'])
+                            @include('_forms.property-input', ['submitButtonText' => 'Edit Property'])
                             {!! Form::close() !!}
                         </div>
                     </div>

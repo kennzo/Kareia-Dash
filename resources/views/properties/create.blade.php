@@ -14,7 +14,7 @@
                                 'method' => 'post',
                                 'route' => ['properties.store'],
                             ]) !!}
-                            @include("properties.form", ['submitButtonText' => 'Add Property'])
+                            @include("_forms.property-input", ['submitButtonText' => 'Add Property'])
                             {!! Form::close() !!}
                         </div>
                     </div>
