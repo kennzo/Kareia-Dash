@@ -7,7 +7,6 @@
     "require": {
         "php": ">=5.6.4",
         "laracasts/presenter": "^0.2.1",
-        "laravel/dusk": "^1.1",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4"
@@ -19,6 +18,7 @@
         "behat/mink-extension": "^2.2",
         "fzaninotto/faker": "~1.4",
         "laracasts/behat-laravel-extension": "^1.0",
+        "laravel/dusk": "^1.1",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.7"
     },

@@ -18,7 +18,7 @@ class ExampleTest extends DuskTestCase
         $response = $this->browse(function (Browser $browser) {
             /** Browser */
             $browser->visit('/')
-                    ->assertSee('Login');
+                    ->assertSee('Kareia-Dashboard');
             ;
         });
     }
