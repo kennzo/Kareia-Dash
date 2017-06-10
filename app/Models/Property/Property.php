@@ -14,6 +14,8 @@ class Property extends Model
 
     protected $presenter = 'App\Models\Property\PropertyPresenter';
 
+    protected $table = "properties";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -49,7 +51,7 @@ class Property extends Model
      */
     public function state()
     {
-        return $this->belongsTo('App\Models\States\States');
+        return $this->belongsTo('App\Models\States\State');
     }
 
     /**
@@ -61,4 +63,25 @@ class Property extends Model
     {
         return $this->hasOne('App\User');
     }
+
+    /**
+     * Gets an array of all estimates that are related to the property
+     */
+    public function estimates()
+    {
+//        return $this->hasMany('App\Models\Estimates\EstimateLookup\EstimateLookup');
+        // todo: Get all elements and add to an array
+    }
+
+    /**
+     * Gets all the estimate lookup elements related to this property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rentalEstimates()
+    {
+        return $this->hasMany('App\Models\Estimates\RentalEstimate\RentalEstimate');
+    }
+
+    // todo: Add function to fetch rehab estimates
 }

@@ -25,17 +25,17 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix' => 'properties'], function() {
     Route::get('/', [
         'as' => 'properties',
-        'uses' => 'PropertiesController@index',
+        'uses' => 'PropertyController@index',
     ]);
 
     Route::get('/create', [
-        'as' => 'properties.create',
-        'uses' => 'PropertiesController@create',
+        'as' => 'property.create',
+        'uses' => 'PropertyController@create',
     ]);
 
     Route::post('/create', [
-        'as' => 'properties.store',
-        'uses' => 'PropertiesController@store',
+        'as' => 'property.store',
+        'uses' => 'PropertyController@store',
     ]);
 });
 
@@ -45,6 +45,21 @@ Route::group(['prefix' => 'properties'], function() {
 Route::group(['prefix' => 'property', 'middleware' => 'property'], function() {
     Route::get('/{id}', [
         'as' => 'property',
-        'uses' => 'PropertiesController@property',
+        'uses' => 'PropertyController@show',
+    ]);
+
+    Route::get('/{id}/edit', [
+        'as' => 'property.edit',
+        'uses' => 'PropertyController@edit',
+    ]);
+
+    Route::patch('/{id}/update', [
+        'as' => 'property.update',
+        'uses' => 'PropertyController@update',
+    ]);
+
+    Route::get('/{id}/destroy', [
+        'as' => 'property.destroy',
+        'uses' => 'PropertyController@destroy',
     ]);
 });

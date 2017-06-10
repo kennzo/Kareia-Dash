@@ -15,12 +15,13 @@ class CreatePropertiesTable extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index('properties_user_id');
+                $table->foreign('user_id')->references('id')->on('users');
             $table->string('street_address');
             $table->string('city');
             $table->integer('state_id');
             $table->string('zip');
             $table->integer('bedrooms')->nullable();
-            $table->float('bathrooms')->nullable();
+            $table->decimal('bathrooms', 2, 1)->nullable();
             $table->integer('garages')->nullable();
             $table->integer('year_built')->nullable();
             $table->integer('living_square_footage')->nullable();

@@ -6,11 +6,12 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        {{ link_to_route('properties', "Back to All Properties") }}
+                        Property Information: | {{ link_to_route('properties', "Back to All Properties") }}
                     </div>
                     <div class="panel-body">
-                        <p>{{ $property->present()->fullAddress }}</p>
-                        <p>{{ $property->state->name }}</p>
+                        <div class="well">
+                            @include('property.details')
+                        </div>
                     </div>
                 </div>
             </div>
