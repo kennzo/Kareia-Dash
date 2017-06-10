@@ -15,21 +15,23 @@
                     </div>
                     <div class="panel-body">
                         @foreach($properties as $property)
-                            {{
-                                link_to_route(
-                                    'property',
-                                    $property->present()->fullAddress,
-                                    ['id' => $property->id]
-                                )
-                            }} | (
-                            {{
-                                link_to_route(
-                                    'property.edit',
-                                    'Edit',
-                                    ['property' => $property]
-                                )
-                            }} )
-                            <br/>
+                            <div class="col-lg-12">
+                                {{
+                                    link_to_route(
+                                        'property',
+                                        $property->present()->fullAddress,
+                                        ['id' => $property->id]
+                                    )
+                                }} | (
+                                {{
+                                    link_to_route(
+                                        'property.edit',
+                                        'Edit',
+                                        ['property' => $property]
+                                    )
+                                }} |
+                                Delete )
+                            </div>
                         @endforeach
                     </div>
                 </div>
