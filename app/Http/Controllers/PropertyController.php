@@ -101,7 +101,12 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        /** @var Property $property */
+        $property = Property::findOrFail($id);
+        $input = request()->all();
+        $property->update($input);
+
+        return redirect()->route('property', ['id' => $id]);
     }
 
     /**

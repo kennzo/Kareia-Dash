@@ -55,7 +55,7 @@
             50 => 'Wyoming',
             51 => 'District of Columbia',
         ],
-        'Choose one...',
+        null,
         ['class' => 'form-control' ]
     )
 !!}
