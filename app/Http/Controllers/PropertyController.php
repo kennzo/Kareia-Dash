@@ -64,7 +64,9 @@ class PropertyController extends Controller
 
         $property->save();
 
-        return redirect()->route('properties')->with('message', 'Property successfully added!');    }
+        return redirect('properties')
+            ->with('message', 'Property successfully added!');
+    }
 
     /**
      * Display the specified resource.
@@ -103,10 +105,11 @@ class PropertyController extends Controller
     {
         /** @var Property $property */
         $property = Property::findOrFail($id);
-        $input = request()->all();
+        $input = $request->all();
         $property->update($input);
 
-        return redirect()->route('property', ['id' => $id]);
+        return redirect()->route('property', ['id' => $id])
+            ->with(['message' => 'Property updated!']);
     }
 
     /**
@@ -117,6 +120,11 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /** @var Property $property */
+        $property = Property::findOrFail($id);
+        $property->delete();
+
+        return redirect('properties')
+            ->with(['message' => 'Property deleted!']);
     }
 }

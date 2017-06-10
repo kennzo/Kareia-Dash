@@ -29,12 +29,12 @@ Route::group(['prefix' => 'properties'], function() {
     ]);
 
     Route::get('/create', [
-        'as' => 'properties.create',
+        'as' => 'property.create',
         'uses' => 'PropertyController@create',
     ]);
 
     Route::post('/create', [
-        'as' => 'properties.store',
+        'as' => 'property.store',
         'uses' => 'PropertyController@store',
     ]);
 });
@@ -58,4 +58,8 @@ Route::group(['prefix' => 'property', 'middleware' => 'property'], function() {
         'uses' => 'PropertyController@update',
     ]);
 
+    Route::get('/{id}/destroy', [
+        'as' => 'property.destroy',
+        'uses' => 'PropertyController@destroy',
+    ]);
 });

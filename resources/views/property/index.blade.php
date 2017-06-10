@@ -8,7 +8,7 @@
                     <div class="panel-heading">Properties |
                         {{
                             link_to_route(
-                                'properties.create',
+                                'property.create',
                                 'Create Property'
                             )
                         }}
@@ -20,7 +20,7 @@
                                     link_to_route(
                                         'property',
                                         $property->present()->fullAddress,
-                                        ['id' => $property->id]
+                                        ['property' => $property]
                                     )
                                 }} | (
                                 {{
@@ -30,7 +30,13 @@
                                         ['property' => $property]
                                     )
                                 }} |
-                                Delete )
+                                {{
+                                    link_to_route(
+                                        'property.destroy',
+                                        'Delete',
+                                        ['property' => $property]
+                                    )
+                                }} )
                             </div>
                         @endforeach
                     </div>
