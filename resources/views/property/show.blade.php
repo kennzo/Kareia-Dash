@@ -10,7 +10,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="well">
-                            @include('properties.details')
+                            @include('property.details')
                         </div>
                     </div>
                 </div>

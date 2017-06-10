@@ -12,7 +12,7 @@
                                 'id' => 'form-property-create',
                                 'class' => 'form-horizontal',
                                 'method' => 'post',
-                                'route' => ['properties.store'],
+                                'route' => ['property.store'],
                             ]) !!}
                             @include("_forms.property-input", ['submitButtonText' => 'Add Property'])
                             {!! Form::close() !!}

@@ -27,7 +27,7 @@ class PropertyController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view("properties.index", compact('properties'));
+        return view("property.index", compact('properties'));
     }
 
     /**
@@ -37,7 +37,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view("properties.create");
+        return view("property.create");
     }
 
     /**
@@ -76,7 +76,7 @@ class PropertyController extends Controller
     {
         $property = Property::findOrFail($id);
 
-        return view("properties.property", compact('property'));
+        return view("property.show", compact('property'));
     }
 
     /**
@@ -89,7 +89,7 @@ class PropertyController extends Controller
     {
         $property = Property::findOrFail($id);
 
-        return view("properties.edit", compact('property'));
+        return view("property.edit", compact('property'));
     }
 
     /**
