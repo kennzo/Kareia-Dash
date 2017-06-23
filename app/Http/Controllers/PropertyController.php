@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property\Property;
+use App\Http\Requests\Property as PropertyValidator;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -43,10 +44,10 @@ class PropertyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param PropertyValidator|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PropertyValidator $request)
     {
         $property = new Property();
         $property->setAttribute('user_id', Auth::user()->getAuthIdentifier());

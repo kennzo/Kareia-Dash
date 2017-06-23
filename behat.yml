@@ -7,10 +7,15 @@ default:
     Laracasts\Behat:
       env_path: .env.behat
     Behat\MinkExtension:
-      default_session: laravel
+      base_url: http://kareia-dash.app
+      default_session: selenium2
       laravel: ~
-#  suites:
-#    default:
-#      paths: [ %paths.base%/tests/features ]
-#      context:
-#      - Tests\Features\Bootstrap\FeatureContext
+      selenium2:
+        wd_host: "http://kareia-dash.app:8643/wd/hub"
+    Bex\Behat\BrowserInitialiserExtension: ~
+    Bex\Behat\ScreenshotExtension:
+      image_drivers:
+        local:
+          screenshot_directory: /var/www/kennzo/Kareia-Dash/storage/behat/
+          clear_screenshot_directory: true
+

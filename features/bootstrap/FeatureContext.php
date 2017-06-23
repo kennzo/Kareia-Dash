@@ -2,8 +2,10 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\MinkContext;
 
 /**
@@ -26,22 +28,45 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         $seeder->run();
     }
 
-//    public function takeScreenshotAfterFailedStep()
-//    {
-//        $this->getSession()->getScreenshot()
-//    }
+    /**
+     * @AfterStep
+     *
+     * @param AfterStepScope $scope
+     */
+    public function takeScreenShotAfterFailedStep(AfterStepScope $scope)
+    {
+        if (99 === $scope->getTestResult()->getResultCode()) {
+            $driver = $this->getSession()->getDriver();
+            if (!($driver instanceof Selenium2Driver)) {
+                return;
+            }
+
+            $fileTitle = trim(preg_replace("#[^a-zA-Z0-9\._-]+#", '_', $scope->getStep()->getText()), '_');
+            $fileName = env('SCREENSHOT_DIR') . DIRECTORY_SEPARATOR . $fileTitle . '.png';
+            file_put_contents($fileName, $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
 
     /**
      * Logs a non-admin user in and takes them to the home/dashboard page
      *
-     * @Given I am logged in and at the dashboard
+     * @Given I am logged in and at the dashboard for user id :id
+     *
+     * @param $id
+     *
+     * @throws Exception
      */
-    public function logged_in_at_dashboard()
+    public function logged_in_at_dashboard($id)
     {
-        // Login using non-admin account
-        Auth::loginUsingId(2);
+        if ($id == 1) {
+            throw new Exception("Trying to login as admin.");
+        }
 
-        $this->getSession()->visit('/home');
+        // Login using non-admin account
+        Auth::loginUsingId($id);
+
+        $this->visitPath('/home');
+//        $this->getSession()->visit('/home');
 
         $this->assertPageAddress('/home');
     }
@@ -63,5 +88,20 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         ];
 
         DB::unprepared('TRUNCATE TABLE ' . implode(',', $tables) . ' RESTART IDENTITY CASCADE');
+    }
+
+    /**
+     * A sleep command to allow for hooks to complete.
+     *
+     * @When I wait for :multiplier second
+     *
+     * @param int $multiplier Increase wait time the number of times.
+     *
+     * @uses usleep To delay execution allowing web engine to work.
+     */
+    public function waitForHooksToComplete($multiplier = 1)
+    {
+        $exponent = pow(10, 6);
+        usleep((int)($exponent * $multiplier));
     }
 }
