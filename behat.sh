@@ -56,7 +56,7 @@ function startPhantomJs {
 function startArtisanServe {
     echo -n "Starting Artisan Serve..."
 
-    php artisan serve --host=privatemoneygoldmine.app --env=behat > /dev/null  2>&1 &
+    php artisan serve --host=kareia-dash.app --env=behat > /dev/null  2>&1 &
 
     echo "done"
 }

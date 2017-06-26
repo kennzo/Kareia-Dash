@@ -1,7 +1,7 @@
 Feature: CRUD test cases for property entity
 
   Background:
-    Given
+    Given I am using "behat" env
 
   Scenario: Successfully create, read, update, and delete a property to an account.
     Given I am on "login"

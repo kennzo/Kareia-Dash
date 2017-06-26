@@ -1,7 +1,7 @@
 Feature: I can add a property successfully and without error.
 
   Scenario: Successfully add a property to an account.
-    Given I am logged in and at the dashboard
+    Given I am logged in and at the dashboard for user id "2"
       And I am on "properties"
       And I follow "Create Property"
     When I fill in "street_address" with "789 2nd St."
@@ -15,27 +15,27 @@ Feature: I can add a property successfully and without error.
       And I fill in "living_square_footage" with "2000"
       And I fill in "lot_square_footage" with "5000"
       And I fill in "neighborhood" with "Smallville"
-      And I press "Create"
+      And I press "Add Property"
     Then I should be on "properties"
       And I should see "Property successfully added!"
 
   Scenario: Successfully add a property to an account with minimum fields.
-    Given I am logged in and at the dashboard
+    Given I am logged in and at the dashboard for user id "2"
       And I am on "properties"
       And I follow "Create Property"
     When I fill in "street_address" with "789 2nd St."
       And I fill in "city" with "Houston"
       And I select "Texas" from "state_id"
       And I fill in "zip" with "77002"
-      And I press "Create"
+      And I press "Add Property"
     Then I should be on "properties"
       And I should see "Property successfully added!"
 
   Scenario: Unsuccessfully add a property to an account with no fields.
-    Given I am logged in and at the dashboard
+    Given I am logged in and at the dashboard for user id "2"
       And I am on "properties"
       And I follow "Create Property"
-    When I press "Create"
+    When I press "Add Property"
     Then I should be on "properties/create"
       And I should see "The street address field is required."
       And I should see "The city field is required."
@@ -43,7 +43,7 @@ Feature: I can add a property successfully and without error.
       And I should see "The zip field is required."
 
   Scenario: Unsuccessfully add a property to an account with bad values.
-    Given I am logged in and at the dashboard
+    Given I am logged in and at the dashboard for user id "2"
       And I am on "properties"
       And I follow "Create Property"
     When I fill in "street_address" with "123 Fake St."
@@ -57,7 +57,7 @@ Feature: I can add a property successfully and without error.
       And I fill in "living_square_footage" with "efgh"
       And I fill in "lot_square_footage" with "ijkl"
       And I fill in "neighborhood" with "Abcdefghij"
-      And I press "Create"
+      And I press "Add Property"
     Then I should be on "properties/create"
       And I should see "The bedrooms must be an integer."
       And I should see "The bathrooms must be a number."

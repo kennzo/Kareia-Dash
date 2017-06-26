@@ -3,11 +3,11 @@ Feature: As a user,
   I'd like to see my own, those shared with me, and not others.
 
   Scenario: Accessing a property that belongs to user.
-    Given I am logged in and at the dashboard
+    Given I am logged in and at the dashboard for user id "2"
     When I am on "/property/4"
     Then I should see "5421 Smith Dr."
 
   Scenario: Accessing a property that belongs to user.
-    Given I am logged in and at the dashboard
+    Given I am logged in and at the dashboard for user id "2"
     When I am on "/property/1"
     Then I should be on "/properties"

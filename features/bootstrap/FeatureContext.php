@@ -3,16 +3,24 @@
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\AfterStepScope;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\MinkContext;
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Facades\Facade;
 
 /**
  * Defines application features from the specific context.
  */
 class FeatureContext extends MinkContext implements Context, SnippetAcceptingContext
 {
+    /**
+     * The Illuminate application instance.
+     *
+     * @var \Illuminate\Foundation\Application
+     */
+    protected $app;
+
     /**
      * Initializes context.
      *
@@ -22,10 +30,46 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
      */
     public function __construct()
     {
+    }
+
+    /**
+     * =========================================================================
+     * =                  GENERIC CONTEXT ELEMENTS AND HOOKS                   =
+     * =========================================================================
+     */
+
+    /** @BeforeScenario
+     * @param BeforeScenarioScope $scope
+     */
+    public function before(BeforeScenarioScope $scope)
+    {
+        if (! $this->app) {
+            $this->app = $this->createApplication();
+        }
+
+        Facade::clearResolvedInstances();
+
+        $this->resetBrowserSession();
         $this->truncateTables();
 
         $seeder = App::make(DatabaseSeeder::class);
         $seeder->run();
+    }
+
+    /**
+     * Creates the application.
+     *
+     * @return \Illuminate\Foundation\Application
+     */
+    public function createApplication()
+    {
+        $app = (require dirname(dirname(__DIR__)).'/bootstrap/app.php');
+//dd($app);
+        $app->make(Kernel::class)->bootstrap();
+
+        $app->make('config')->set('app.url', $this->getMinkParameter('base_url'));
+
+        return $app;
     }
 
     /**
@@ -45,6 +89,24 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
             $fileName = env('SCREENSHOT_DIR') . DIRECTORY_SEPARATOR . $fileTitle . '.png';
             file_put_contents($fileName, $this->getSession()->getDriver()->getScreenshot());
         }
+    }
+
+    /**
+     * =========================================================================
+     * =                           STEP DEFINITIONS                            =
+     * =========================================================================
+     */
+
+    /**
+     * Reset browsers session.
+     *
+     * Used to simulate "private browser" environment.
+     *
+     * @Given I open new browser
+     */
+    public function resetBrowserSession()
+    {
+        $this->getSession()->reset();
     }
 
     /**
@@ -103,5 +165,22 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     {
         $exponent = pow(10, 6);
         usleep((int)($exponent * $multiplier));
+    }
+
+    /**
+     * An assertion that the environment file is correct.
+     *
+     * @Given I am using :environment env
+     *
+     * @param string $environment
+     *
+     * @throws Exception
+     */
+    public function verifyEnvironment($environment)
+    {
+        $env = env('APP_ENV');
+        if ($env != $environment) {
+            throw new Exception("Wrong environment: actual [$env] != expected[$environment]");
+        }
     }
 }

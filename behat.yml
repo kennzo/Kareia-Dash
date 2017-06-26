@@ -18,4 +18,3 @@ default:
         local:
           screenshot_directory: /var/www/kennzo/Kareia-Dash/storage/behat/
           clear_screenshot_directory: true
-
