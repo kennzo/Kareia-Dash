@@ -64,7 +64,8 @@ class PropertyController extends Controller
 
         $property->save();
 
-        return redirect('properties')
+        return redirect()
+            ->route('property', array('id' => $property->id))
             ->with('message', 'Property successfully added!');
     }
 

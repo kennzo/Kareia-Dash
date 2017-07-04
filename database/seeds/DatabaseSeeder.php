@@ -29,6 +29,12 @@ class DatabaseSeeder extends Seeder
             $this->call(RentalEstimatesTableSeeder::class);
         }
 
+        if (App::environment() == 'dusk') {
+            $this->truncateTables();
+            $this->call(UsersTableSeeder::class);
+            $this->call(PropertiesTableSeeder::class);
+            $this->call(RentalEstimatesTableSeeder::class);
+        }
     }
 
     /**
