@@ -34,7 +34,8 @@
                                     link_to_route(
                                         'property.destroy',
                                         'Delete',
-                                        ['property' => $property]
+                                        ['property' => $property],
+                                        ['onclick' => "return confirm('Are you sure?')"]
                                     )
                                 }} )
                             </div>

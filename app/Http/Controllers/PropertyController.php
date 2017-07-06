@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Property\Property;
 use Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\Property as PropertyRequest;
 
 class PropertyController extends Controller
 {
@@ -43,10 +44,10 @@ class PropertyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param PropertyRequest|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PropertyRequest $request)
     {
         $property = new Property();
         $property->setAttribute('user_id', Auth::user()->getAuthIdentifier());
@@ -64,7 +65,8 @@ class PropertyController extends Controller
 
         $property->save();
 
-        return redirect('properties')
+        return redirect()
+            ->route('property', array('id' => $property->id))
             ->with('message', 'Property successfully added!');
     }
 
@@ -97,11 +99,11 @@ class PropertyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param PropertyRequest|Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PropertyRequest $request, $id)
     {
         /** @var Property $property */
         $property = Property::findOrFail($id);
