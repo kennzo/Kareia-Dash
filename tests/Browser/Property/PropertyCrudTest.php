@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser;
+namespace Tests\Browser\Property;
 
 use DatabaseSeeder;
 use Tests\DuskTestCase;
@@ -12,7 +12,7 @@ class PropertyCrudTest extends DuskTestCase
      *
      * @return void
      */
-    public function testCreateProperty()
+    public function testCrudProperty()
     {
         $this->seed(DatabaseSeeder::class);
 
@@ -22,10 +22,8 @@ class PropertyCrudTest extends DuskTestCase
                 ->type('email', 'kenneth.sok@gmail.com')
                 ->type('password', 'secret')
                 ->press('Login')
-                ->pause(100)
                 ->assertSee('You are logged in!')
                 ->clickLink("Go here for your properties.");
-
             // Create a Property
             $browser->clickLink("Create Property")
                 ->assertSee("Create Property")
@@ -41,9 +39,7 @@ class PropertyCrudTest extends DuskTestCase
                 ->type("lot_square_footage", "5999")
                 ->type("neighborhood", "Smallville")
                 ->press("Add Property")
-                ->pause(500)
             // Read a Property
-                ->assertSee("Property successfully added!")
                 ->assertSee("Property Address:")
                 ->assertSee("12345 Main St.");
 
@@ -52,16 +48,45 @@ class PropertyCrudTest extends DuskTestCase
                 ->assertSee("Edit Property")
                 ->type("street_address", "54321 2nd St.")
                 ->press("Edit Property")
-                ->pause(500)
-                ->assertSee("Property updated!")
-                ->assertSee("54321 2nd St.");
+                ->assertSee("54321 2nd St.")
+                ->assertDontSee("12345 Main St.");
 
             // Delete a Property
             $browser->clickLink("Delete");
             $browser->acceptDialog()
-                ->pause(100);
-            $browser->assertSee("Property deleted!")
                 ->assertDontSee("54321 2nd St.");
+
+            // Logout
+            $browser->clickLink('Kenneth Sok');
+            $browser->clickLink('Logout');
+            $browser->assertSee("Kareia-Dashboard");
+        });
+    }
+
+    public function testFailedCrudProperty()
+    {
+        $this->browse(function ($browser) {
+            $browser->visit('/login')
+                ->type('email', 'kenneth.sok@gmail.com')
+                ->type('password', 'secret')
+                ->press('Login')
+                ->assertSee('You are logged in!')
+                ->clickLink("Go here for your properties.");
+            // Create a Property
+            $browser->clickLink("Create Property")
+                ->assertSee("Create Property")
+                ->press("Add Property")
+                ->assertSee("Oops! There were some errors:")
+                ->assertSee("The street address field is required.")
+                ->assertSee("The city field is required.")
+                ->assertSee("The state id field is required.")
+                ->assertSee("The zip field is required.");
+            // Edit a Property
+            $browser->visit('/property/1/edit')
+                ->type("street_address", "")
+                ->press("Edit Property")
+                ->assertSee("Oops! There were some errors:")
+                ->assertSee("The street address field is required.");
         });
     }
 }

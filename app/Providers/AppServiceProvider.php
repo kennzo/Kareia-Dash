@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(IdeHelperServiceProvider::class);
         }
 
-        if ($this->app->environment('local', 'testing')) {
+        if ($this->app->environment('local', 'testing', 'dusk')) {
             $this->app->register(DuskServiceProvider::class);
         }
 
