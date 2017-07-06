@@ -7,11 +7,12 @@ Feature: Initial login and Register
     Given I am on the homepage
     When I follow "Login"
     Then I should be on "login"
-    When I fill in "email" with "john@example.com"
+    When I fill in "email" with "kenneth.sok@gmail.com"
       And I fill in "password" with "secret"
       And I press "Login"
     Then I should be on "home"
 
+    # Need to add logic to clear out database (or use a test database) It's currently not doing so...
   Scenario: Initial successful registration
     Given I am on the homepage
     When I follow "Register"
@@ -21,4 +22,5 @@ Feature: Initial login and Register
       And I fill in "password" with "secret"
       And I fill in "password_confirmation" with "secret"
       And I press "Register"
+      And I wait for 1 second
     Then I should be on "home"
