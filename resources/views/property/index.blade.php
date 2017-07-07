@@ -18,7 +18,7 @@
                             <div class="col-lg-12">
                                 {{
                                     link_to_route(
-                                        'property',
+                                        'property.show',
                                         $property->present()->fullAddress,
                                         ['property' => $property]
                                     )

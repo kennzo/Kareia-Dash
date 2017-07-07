@@ -66,7 +66,7 @@ class PropertyController extends Controller
         $property->save();
 
         return redirect()
-            ->route('property', array('id' => $property->id))
+            ->route('property.show', array('id' => $property->id))
             ->with('message', 'Property successfully added!');
     }
 
@@ -110,23 +110,24 @@ class PropertyController extends Controller
         $input = $request->all();
         $property->update($input);
 
-        return redirect()->route('property', ['id' => $id])
+        return redirect()->route('property.show', ['id' => $id])
             ->with(['message' => 'Property updated!']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Property $property
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Property $property)
     {
         /** @var Property $property */
-        $property = Property::findOrFail($id);
+//        $property = Property::findOrFail($id);
         $property->delete();
 
-        return redirect('properties')
+        return redirect('property.index')
             ->with(['message' => 'Property deleted!']);
     }
 }
