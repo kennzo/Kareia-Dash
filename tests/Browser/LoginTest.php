@@ -5,9 +5,17 @@ namespace Tests\Browser;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use UsersTableSeeder;
 
 class LoginTest extends DuskTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $this->runDatabaseMigrations();
+        $this->seed(UsersTableSeeder::class);
+    }
+
     /**
      * A test for unsuccessful login.
      */
