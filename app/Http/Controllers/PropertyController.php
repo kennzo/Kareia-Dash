@@ -15,6 +15,17 @@ class PropertyController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(
+            'property',
+            [
+                'only' => [
+                    'show',
+                    'edit',
+                    'update',
+                    'destroy'
+                ]
+            ]
+        );
     }
 
     /**
@@ -73,26 +84,22 @@ class PropertyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Property $property
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Property $property)
     {
-        $property = Property::findOrFail($id);
-
         return view("property.show", compact('property'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Property $property
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Property $property)
     {
-        $property = Property::findOrFail($id);
-
         return view("property.edit", compact('property'));
     }
 
@@ -100,17 +107,18 @@ class PropertyController extends Controller
      * Update the specified resource in storage.
      *
      * @param PropertyRequest|Request $request
-     * @param  int $id
+     * @param Property $property
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function update(PropertyRequest $request, $id)
+    public function update(PropertyRequest $request, Property $property)
     {
         /** @var Property $property */
-        $property = Property::findOrFail($id);
+//        $property = Property::findOrFail($id);
         $input = $request->all();
         $property->update($input);
 
-        return redirect()->route('property.show', ['id' => $id])
+        return redirect()->route('property.show', ['property' => $property])
             ->with(['message' => 'Property updated!']);
     }
 

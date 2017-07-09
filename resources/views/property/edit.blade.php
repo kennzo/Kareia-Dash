@@ -16,7 +16,7 @@
                                     'method' => 'PATCH',
                                     'action' => [
                                         'PropertyController@update',
-                                        $property->id
+                                        $property
                                     ],
                                 ]) !!}
                             @include('_forms.property-input', ['submitButtonText' => 'Edit Property'])
