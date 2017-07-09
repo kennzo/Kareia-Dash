@@ -7,6 +7,13 @@ use Tests\DuskTestCase;
 
 class PropertyCrudTest extends DuskTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $this->runDatabaseMigrations();
+        $this->seed(DatabaseSeeder::class);
+    }
+
     /**
      * Test creating a property.
      *
@@ -14,8 +21,6 @@ class PropertyCrudTest extends DuskTestCase
      */
     public function testCrudProperty()
     {
-        $this->seed(DatabaseSeeder::class);
-
         $this->browse(function ($browser) {
             // Login
             $browser->visit('/login')
@@ -52,17 +57,16 @@ class PropertyCrudTest extends DuskTestCase
                 ->assertDontSee("12345 Main St.");
 
             // Delete a Property
-            $browser->clickLink("Delete");
+            $browser->press("Delete");
             $browser->acceptDialog()
                 ->assertDontSee("54321 2nd St.");
-
-            // Logout
-            $browser->clickLink('Kenneth Sok');
-            $browser->clickLink('Logout');
-            $browser->assertSee("Kareia-Dashboard");
         });
     }
 
+    /**
+     * Verifies that when trying to improperly creating/editing properties,
+     * it will fail accordingly and show a failure message.
+     */
     public function testFailedCrudProperty()
     {
         $this->browse(function ($browser) {

@@ -9,13 +9,8 @@
                         Property Information:
                     </div>
                     <div class="panel-heading">
-                        {{ link_to_route('property.edit', "Edit", ['id' => $property->id]) }} |
-                        <!-- todo: Use a form or something b/c I have to pass it a DELETE method, not as a GET. -->
-                        {{ link_to_route(
-                            'property.destroy',
-                            "Delete",
-                            ['property' => $property],
-                            ['onclick' => "return confirm('Are you sure?')"]) }} |
+                        @include('property.include.editButton')
+                        @include('property.include.destroyButton')
                         {{ link_to_route('property.index', "Back to All Properties") }}
                     </div>
                     <div class="panel-body">

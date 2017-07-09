@@ -123,11 +123,9 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        /** @var Property $property */
-//        $property = Property::findOrFail($id);
         $property->delete();
 
-        return redirect('property.index')
+        return redirect()->route('property.index')
             ->with(['message' => 'Property deleted!']);
     }
 }
