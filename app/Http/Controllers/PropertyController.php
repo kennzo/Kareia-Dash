@@ -89,7 +89,8 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        return view("property.show", compact('property'));
+        $rentalEstimates = $property->rentalEstimates;
+        return view("property.show", compact('property', 'rentalEstimates'));
     }
 
     /**

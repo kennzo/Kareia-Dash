@@ -18,14 +18,7 @@
                             @include('property.details')
                         </div>
                     </div>
-                    <div class="panel-heading">
-                        Rental Estimates: | {{ link_to_route('property.create', "Create New Estimate", ['id' => $property->id]) }}
-                    </div>
-                    <div class="panel-body">
-                        <div class="well">
-                            @include('property.details')
-                        </div>
-                    </div>
+                    @include('rentalEstimate.propertyIndex')
                 </div>
             </div>
         </div>
