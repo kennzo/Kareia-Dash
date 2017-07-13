@@ -44,7 +44,8 @@ class RentalEstimateController extends Controller
      */
     public function create()
     {
-        //
+        // todo: Use the request variable to fetch the property Id if present and return the appropriate form.
+        return view('rentalEstimate.create');
     }
 
     /**
@@ -56,6 +57,7 @@ class RentalEstimateController extends Controller
     public function store(Request $request)
     {
         //
+        dd("Storing the new Rental Estimate");
     }
 
     /**

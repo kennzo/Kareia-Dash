@@ -12,6 +12,17 @@ use Laracasts\Presenter\Presenter;
  * @package App\Models\Estimates\RentalEstimate\RentalEstimate
  */class RentalEstimatePresenter extends Presenter
 {
+    /**
+     * Returns a hash with adler32 algorithm for creating a new CSS
+     * id to be used and referenced.
+     *
+     * @return string
+     */
+    public function convertNameToCssId()
+    {
+        return hash('adler32', $this->name);
+    }
+
     public function formatArv()
     {
         return "$" . number_format($this->arv, 2);
