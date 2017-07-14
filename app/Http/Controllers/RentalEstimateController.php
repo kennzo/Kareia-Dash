@@ -44,8 +44,15 @@ class RentalEstimateController extends Controller
      */
     public function create()
     {
-        // todo: Use the request variable to fetch the property Id if present and return the appropriate form.
-        return view('rentalEstimate.create');
+        $propertiesArray = [];
+        $propertiesArray[''] = "Choose your property...";
+
+        /** @var Property $property */
+        foreach(Auth::user()->properties as $property) {
+            $propertiesArray[$property->id] = $property->present()->fullAddress;
+        }
+
+        return view('rentalEstimate.create', compact('propertiesArray'));
     }
 
     /**
@@ -56,8 +63,32 @@ class RentalEstimateController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd("Storing the new Rental Estimate");
+        $rentalEstimate = new RentalEstimate();
+        $rentalEstimate->setAttribute('property_id', $request['property_id']);
+        $rentalEstimate->setAttribute('name', $request['name']);
+        $rentalEstimate->setAttribute('arv', $request['arv']);
+        $rentalEstimate->setAttribute('purchase_price', $request['purchase_price']);
+        $rentalEstimate->setAttribute('repairs', $request['repairs']);
+        $rentalEstimate->setAttribute('financed', $request['financed']);
+        $rentalEstimate->setAttribute('total_loan_amount', $request['total_loan_amount']);
+        $rentalEstimate->setAttribute('interest_rate', $request['interest_rate']);
+        $rentalEstimate->setAttribute('term', $request['term']);
+        $rentalEstimate->setAttribute('rental_arv', $request['rental_arv']);
+        $rentalEstimate->setAttribute('other_income', $request['other_income']);
+        $rentalEstimate->setAttribute('annual_taxes', $request['annual_taxes']);
+        $rentalEstimate->setAttribute('insurance', $request['insurance']);
+        $rentalEstimate->setAttribute('hoa', $request['hoa']);
+        $rentalEstimate->setAttribute('use_property_management', $request['use_property_management']);
+        $rentalEstimate->setAttribute('property_management_fee', $request['property_management_fee']);
+        $rentalEstimate->setAttribute('capital_expenditures', $request['capital_expenditures']);
+        $rentalEstimate->setAttribute('vacancy', $request['vacancy']);
+        $rentalEstimate->setAttribute('monthly_repairs', $request['monthly_repairs']);
+
+        $rentalEstimate->save();
+
+        return redirect()
+            ->route('property.show', array('id' => $request['property_id']))
+            ->with('message', 'Estimate successfully added!');
     }
 
     /**
@@ -79,7 +110,7 @@ class RentalEstimateController extends Controller
      */
     public function edit(RentalEstimate $rentalEstimate)
     {
-        //
+        // May not need this since the editing will be done on the property page
     }
 
     /**
@@ -91,7 +122,12 @@ class RentalEstimateController extends Controller
      */
     public function update(Request $request, RentalEstimate $rentalEstimate)
     {
-        //
+        /** @var RentalEstimate $property */
+        $input = $request->all();
+        $rentalEstimate->update($input);
+
+        return redirect()->route('property.show', ['property' => $rentalEstimate->property])
+            ->with(['message' => 'Rental Estimate updated!']);
     }
 
     /**
@@ -102,6 +138,10 @@ class RentalEstimateController extends Controller
      */
     public function destroy(RentalEstimate $rentalEstimate)
     {
-        //
+        $property = $rentalEstimate->property;
+        $rentalEstimate->delete();
+
+        return redirect()->route('property.show', ['property' => $property])
+            ->with(['message' => 'Rental Estimate deleted!']);
     }
 }

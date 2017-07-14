@@ -115,7 +115,6 @@ class PropertyController extends Controller
     public function update(PropertyRequest $request, Property $property)
     {
         /** @var Property $property */
-//        $property = Property::findOrFail($id);
         $input = $request->all();
         $property->update($input);
 

@@ -10,7 +10,7 @@ $factory->define(App\Models\Estimates\RentalEstimate\RentalEstimate::class, func
         'repairs' => $faker->numberBetween(0, 50000),
         'financed' => $faker->boolean(),
         'total_loan_amount' => $faker->numberBetween(25000, 250000),
-        'interest_rate' => $faker->randomFloat(null, 0, 1),
+        'interest_rate' => $faker->randomFloat(null, 0, 10),
         'term' => $faker->numberBetween(1, 20),
         'rental_arv' => $faker->numberBetween(1000, 2500),
         'other_income' => $faker->numberBetween(50, 250),

@@ -14,7 +14,7 @@
         <div class="col-lg-8">
             {!! Form::number(
                 'arv',
-                isset($rentalEstiamte)? $rentalEstimate->arv : null,
+                isset($rentalEstimate)? $rentalEstimate->arv : null,
                 ['class' => 'form-control']) !!}
         </div>
     </div>
@@ -66,7 +66,7 @@
             {!! Form::number(
                 'interest_rate',
                 isset($rentalEstimate)? $rentalEstimate->interest_rate : null,
-                ['class' => 'form-control']) !!}
+                ['class' => 'form-control', 'step' => '0.001']) !!}
         </div>
     </div>
 

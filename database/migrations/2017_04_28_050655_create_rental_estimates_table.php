@@ -22,7 +22,7 @@ class CreateRentalEstimatesTable extends Migration
             $table->decimal('repairs', 8, 2);
             $table->boolean('financed')->nullable();
             $table->decimal('total_loan_amount', 8, 2)->nullable();
-            $table->decimal('interest_rate', 8, 2)->nullable();
+            $table->decimal('interest_rate', 8, 3)->nullable();
             $table->integer('term')->nullable();
             $table->decimal('rental_arv', 8, 2);
             $table->decimal('other_income', 8, 2)->nullable();

@@ -18,12 +18,17 @@
         <div id="{{ $rentalEstimate->present()->convertNameToCssId }}" class="tab-pane fade">
             <br/>
             <div class="well">
-                {!! Form::open([
-                    'id' => 'form-rental-estimate-create',
-                    'class' => 'form-horizontal',
-                    'method' => 'post',
-                    'route' => ['rentalEstimate.store'],
-                ]) !!}
+                {!! Form::model(
+                    $rentalEstimate,
+                    [
+                        'id' => 'form-rental-estimate-update',
+                        'class' => 'form-horizontal',
+                        'method' => 'PATCH',
+                        'action' => [
+                            'RentalEstimateController@update',
+                            $rentalEstimate
+                        ],
+                    ]) !!}
                 @include("_forms.rentalEstimate-input", ['submitButtonText' => 'Save Estimate'])
                 {!! Form::close() !!}
             </div>
