@@ -10,8 +10,19 @@
     </div>
 
     <div class='form-group'>
-        {!! Form::label('arv', 'After Repair Value (ARV)', ['class' => 'col-lg-2 control-label']) !!}
+        {!! Form::label('name', 'Description', ['class' => 'col-lg-2 control-label']) !!}
         <div class="col-lg-8">
+            {!! Form::textarea(
+                'description',
+                isset($rentalEstimate)? $rentalEstimate->description : null,
+                ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <div class='form-group'>
+        {!! Form::label('arv', 'After Repair Value (ARV)', ['class' => 'col-lg-2 control-label']) !!}
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'arv',
                 isset($rentalEstimate)? $rentalEstimate->arv : null,
@@ -21,7 +32,8 @@
 
     <div class='form-group'>
         {!! Form::label('purchase_price', 'Purchase Price', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'purchase_price',
                 isset($rentalEstimate)? $rentalEstimate->purchase_price : null,
@@ -31,7 +43,8 @@
 
     <div class='form-group'>
         {!! Form::label('repairs', 'Repairs:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'repairs',
                 isset($rentalEstimate)? $rentalEstimate->repairs : null,
@@ -52,7 +65,8 @@
 
     <div class='form-group'>
         {!! Form::label('total_loan_amount', 'Total Loan Amount:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'total_loan_amount',
                 isset($rentalEstimate)? $rentalEstimate->total_loan_amount : null,
@@ -62,7 +76,8 @@
 
     <div class='form-group'>
         {!! Form::label('interest_rate', 'Interest Rate:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'interest_rate',
                 isset($rentalEstimate)? $rentalEstimate->interest_rate : null,
@@ -82,7 +97,8 @@
 
     <div class='form-group'>
         {!! Form::label('rental_arv', 'Rental ARV:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'rental_arv',
                 isset($rentalEstimate)? $rentalEstimate->rental_arv : null,
@@ -92,7 +108,8 @@
 
     <div class='form-group'>
         {!! Form::label('other_income', 'Other Income:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'other_income',
                 isset($rentalEstimate)? $rentalEstimate->other_income : null,
@@ -102,7 +119,8 @@
 
     <div class='form-group'>
         {!! Form::label('annual_taxes', 'Annual Taxes:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'annual_taxes',
                 isset($rentalEstimate)? $rentalEstimate->annual_taxes : null,
@@ -112,7 +130,8 @@
 
     <div class='form-group'>
         {!! Form::label('insurance', 'Insurance:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'insurance',
                 isset($rentalEstimate)? $rentalEstimate->insurance : null,
@@ -122,7 +141,8 @@
 
     <div class='form-group'>
         {!! Form::label('hoa', 'Home Owners Association:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'hoa',
                 isset($rentalEstimate)? $rentalEstimate->hoa : null,
@@ -143,7 +163,8 @@
 
     <div class='form-group'>
         {!! Form::label('property_management_fee', 'Property Management Fee:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'property_management_fee',
                 isset($rentalEstimate)? $rentalEstimate->property_management_fee : null,
@@ -153,7 +174,8 @@
 
     <div class='form-group'>
         {!! Form::label('capital_expenditures', 'Capital Expenditures:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'capital_expenditures',
                 isset($rentalEstimate)? $rentalEstimate->capital_expenditures : null,
@@ -163,7 +185,8 @@
 
     <div class='form-group'>
         {!! Form::label('vacancy', 'Vacancy:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'vacancy',
                 isset($rentalEstimate)? $rentalEstimate->vacancy : null,
@@ -173,7 +196,8 @@
 
     <div class='form-group'>
         {!! Form::label('monthly_repairs', 'Monthly Repairs:', ['class' => 'col-lg-2 control-label']) !!}
-        <div class="col-lg-8">
+        <div class="col-lg-8 input-group">
+            <span class="input-group-addon">$</span>
             {!! Form::number(
                 'monthly_repairs',
                 isset($rentalEstimate)? $rentalEstimate->monthly_repairs : null,

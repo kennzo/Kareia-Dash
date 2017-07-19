@@ -81,9 +81,15 @@
             </div>
         </nav>
 
-        @include('_shared.errors')
-
-        @include('_shared.message')
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    @include('_shared.errors')
+                    @include('_shared.message')
+                </div>
+            </div>
+            <br/>
+        </div>
 
         @yield('content')
     </div>

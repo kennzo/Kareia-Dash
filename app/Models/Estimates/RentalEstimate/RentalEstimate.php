@@ -16,6 +16,7 @@ class RentalEstimate extends Model
     protected $fillable = [
         'property_id',
         'name',
+        'description',
         'arv',
         'purchase_price',
         'repairs',

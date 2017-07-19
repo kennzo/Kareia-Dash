@@ -13,6 +13,7 @@
         <div id="create_rental_estimate" class="tab-pane fade in active">
             <br/>
             <h4>{{ link_to_route('rentalEstimate.create', "Create New Estimate", ['propertyId' => $property->id]) }}</h4>
+            <p>Click here to create a new rental estimate entry.</p>
         </div>
         @foreach($rentalEstimates as $rentalEstimate)
         <div id="{{ $rentalEstimate->present()->convertNameToCssId }}" class="tab-pane fade">

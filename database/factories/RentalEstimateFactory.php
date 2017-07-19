@@ -5,6 +5,7 @@ $factory->define(App\Models\Estimates\RentalEstimate\RentalEstimate::class, func
     return [
         'property_id' => $faker->numberBetween(1, 13),
         'name' => $faker->company,
+        'description' => $faker->paragraph(),
         'arv' => $faker->numberBetween(50000, 250000),
         'purchase_price' => $faker->numberBetween(25000, 250000),
         'repairs' => $faker->numberBetween(0, 50000),

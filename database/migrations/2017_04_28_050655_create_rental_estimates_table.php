@@ -17,6 +17,7 @@ class CreateRentalEstimatesTable extends Migration
             $table->integer('property_id')->index('rental_estimates_property_id');
                 $table->foreign('property_id')->references('id')->on('properties');
             $table->string('name');
+            $table->text('description')->nullable();
             $table->decimal('arv', 8, 2)->nullable();
             $table->decimal('purchase_price', 8, 2);
             $table->decimal('repairs', 8, 2);
