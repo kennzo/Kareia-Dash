@@ -22,12 +22,11 @@
                             @include('property.details')
                         </div>
                     </div>
-
-                    <!-- Rental Estimate area -->
-                    @include('rentalEstimate.propertyIndex')
-                    <!-- End Rental Estimate area -->
                 </div>
             </div>
         </div>
     </div>
+    <!-- Rental Estimate area -->
+    @include('rentalEstimate.propertyIndex')
+    <!-- End Rental Estimate area -->
 @endsection

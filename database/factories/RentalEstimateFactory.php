@@ -17,6 +17,7 @@ $factory->define(App\Models\Estimates\RentalEstimate\RentalEstimate::class, func
         'other_income' => $faker->numberBetween(50, 250),
         'annual_taxes' => $faker->numberBetween(1000, 2500),
         'insurance' => $faker->numberBetween(750, 2500),
+        'hoa_term' => rand(0,1) == 1? 'annual' : 'monthly',
         'hoa' => $faker->numberBetween(300, 1200),
         'use_property_management' => $faker->boolean(),
         'property_management_fee' => $faker->numberBetween(100,200),

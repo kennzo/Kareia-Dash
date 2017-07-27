@@ -20,7 +20,7 @@ class CreateRentalEstimatesTable extends Migration
             $table->text('description')->nullable();
             $table->decimal('arv', 8, 2)->nullable();
             $table->decimal('purchase_price', 8, 2);
-            $table->decimal('repairs', 8, 2);
+            $table->decimal('repairs', 8, 2)->nullable();
             $table->boolean('financed')->nullable();
             $table->decimal('total_loan_amount', 8, 2)->nullable();
             $table->decimal('interest_rate', 8, 3)->nullable();
@@ -29,6 +29,7 @@ class CreateRentalEstimatesTable extends Migration
             $table->decimal('other_income', 8, 2)->nullable();
             $table->decimal('annual_taxes', 8, 2)->nullable();
             $table->decimal('insurance', 8, 2)->nullable();
+            $table->enum('hoa_term', ['annual', 'monthly'])->nullable();
             $table->decimal('hoa', 8, 2)->default(0)->nullable();
             $table->boolean('use_property_management')->default(false)->nullable();
             $table->decimal('property_management_fee', 8, 2)->nullable();

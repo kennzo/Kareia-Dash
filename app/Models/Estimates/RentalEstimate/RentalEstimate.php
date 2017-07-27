@@ -28,6 +28,7 @@ class RentalEstimate extends Model
         'other_income',
         'annual_taxes',
         'insurance',
+        'hoa_term',
         'hoa',
         'use_property_management',
         'property_management_fee',

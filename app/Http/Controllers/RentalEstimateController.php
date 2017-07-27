@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estimates\RentalEstimate\RentalEstimate;
+use App\Http\Requests\RentalEstimate as RentalEstimateRequest;
 use App\Models\Property\Property;
 use Auth;
 use Illuminate\Http\Request;
@@ -58,14 +59,15 @@ class RentalEstimateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param RentalEstimateRequest|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RentalEstimateRequest $request)
     {
         $rentalEstimate = new RentalEstimate();
         $rentalEstimate->setAttribute('property_id', $request['property_id']);
         $rentalEstimate->setAttribute('name', $request['name']);
+        $rentalEstimate->setAttribute('description', $request['description']);
         $rentalEstimate->setAttribute('arv', $request['arv']);
         $rentalEstimate->setAttribute('purchase_price', $request['purchase_price']);
         $rentalEstimate->setAttribute('repairs', $request['repairs']);
@@ -77,6 +79,7 @@ class RentalEstimateController extends Controller
         $rentalEstimate->setAttribute('other_income', $request['other_income']);
         $rentalEstimate->setAttribute('annual_taxes', $request['annual_taxes']);
         $rentalEstimate->setAttribute('insurance', $request['insurance']);
+        $rentalEstimate->setAttribute('hoa_term', $request['hoa_term']);
         $rentalEstimate->setAttribute('hoa', $request['hoa']);
         $rentalEstimate->setAttribute('use_property_management', $request['use_property_management']);
         $rentalEstimate->setAttribute('property_management_fee', $request['property_management_fee']);
@@ -116,11 +119,11 @@ class RentalEstimateController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Estimates\RentalEstimate\RentalEstimate  $rentalEstimate
+     * @param RentalEstimateRequest|Request $request
+     * @param  \App\Models\Estimates\RentalEstimate\RentalEstimate $rentalEstimate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RentalEstimate $rentalEstimate)
+    public function update(RentalEstimateRequest $request, RentalEstimate $rentalEstimate)
     {
         /** @var RentalEstimate $property */
         $input = $request->all();
