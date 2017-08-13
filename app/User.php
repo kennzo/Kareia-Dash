@@ -36,4 +36,15 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Property\Property');
     }
+
+    /**
+     * Gets all rental estimates that user owns.
+     */
+    public function rentalEstimates()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Estimates\RentalEstimate\RentalEstimate',
+            'App\Models\Property\Property'
+        );
+    }
 }

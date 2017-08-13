@@ -21,4 +21,6 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('property', 'PropertyController');
 
-Route::resource('rentalEstimate', 'RentalEstimateController');
+Route::resource('rentalEstimate', 'RentalEstimateController', ['except' => [
+    'index', 'show',
+]]);

@@ -14,8 +14,12 @@
                                 'method' => 'post',
                                 'route' => ['rentalEstimate.store'],
                             ]) !!}
-                            @include("_forms.userProperties", ['properties' => $propertiesArray])
-                            @include("_forms.rentalEstimate-input", ['submitButtonText' => 'Add New Estimate'])
+                            @if (!empty($propertyId))
+                                <input type="hidden" name="property_id" value={!! $propertyId !!}>
+                            @else
+                                @include("_forms.userProperties", ['properties' => $propertiesArray])
+                            @endif
+                            @include("_forms.rentalEstimate-input", ['submitButtonText' => 'Add New Estimate', 'showDeleteButton' => false])
                             {!! Form::close() !!}
                         </div>
                     </div>

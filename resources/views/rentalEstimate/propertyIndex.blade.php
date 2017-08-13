@@ -40,7 +40,7 @@
                                                 $rentalEstimate
                                             ],
                                         ]) !!}
-                                        @include("_forms.rentalEstimate-input", ['submitButtonText' => 'Save Estimate'])
+                                        @include("_forms.rentalEstimate-input", ['submitButtonText' => 'Save Estimate', 'showDeleteButton' => true])
                                     {!! Form::close() !!}
                                 </div>
                             </div>

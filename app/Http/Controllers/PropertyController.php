@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estimates\RentalEstimate\RentalEstimate;
 use App\Models\Property\Property;
 use Auth;
 use Illuminate\Http\Request;
@@ -39,7 +40,10 @@ class PropertyController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view("property.index", compact('properties'));
+        // todo: Setup view for rentalEstimates such that clicking the link will take you straight to the property and show you the view.
+        $rentalEstimates = Auth::user()->rentalEstimates;
+
+        return view("property.index", compact('properties', 'rentalEstimates'));
     }
 
     /**
@@ -131,6 +135,13 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
+        // Cascade the delete to all rentalEstimates that belong to a property
+        $rentalEstimates = $property->rentalEstimates;
+        /** @var RentalEstimate $rentalEstimate */
+        foreach ($rentalEstimates as $rentalEstimate) {
+            $rentalEstimate->delete();
+        }
+
         $property->delete();
 
         return redirect()->route('property.index')

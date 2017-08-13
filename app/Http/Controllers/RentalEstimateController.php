@@ -16,17 +16,6 @@ class RentalEstimateController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-//        $this->middleware(
-//            'property',
-//            [
-//                'only' => [
-//                    'show',
-//                    'edit',
-//                    'update',
-//                    'destroy'
-//                ]
-//            ]
-//        );
     }
 
     /**
@@ -45,15 +34,21 @@ class RentalEstimateController extends Controller
      */
     public function create()
     {
+        $propertyId = "";
         $propertiesArray = [];
-        $propertiesArray[''] = "Choose your property...";
 
-        /** @var Property $property */
-        foreach(Auth::user()->properties as $property) {
-            $propertiesArray[$property->id] = $property->present()->fullAddress;
+        if (isset($_GET['propertyId']) && is_numeric($_GET['propertyId'])) {
+            $propertyId = $_GET['propertyId'];
+        } else {
+            $propertiesArray[''] = "Choose your property...";
+
+            /** @var Property $property */
+            foreach(Auth::user()->properties as $property) {
+                $propertiesArray[$property->id] = $property->present()->fullAddress;
+            }
         }
 
-        return view('rentalEstimate.create', compact('propertiesArray'));
+        return view('rentalEstimate.create', compact('propertiesArray', 'propertyId'));
     }
 
     /**

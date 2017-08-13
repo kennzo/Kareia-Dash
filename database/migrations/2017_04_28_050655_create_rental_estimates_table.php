@@ -15,7 +15,7 @@ class CreateRentalEstimatesTable extends Migration
         Schema::create('rental_estimates', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->index('rental_estimates_property_id');
-                $table->foreign('property_id')->references('id')->on('properties');
+                $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('arv', 8, 2)->nullable();

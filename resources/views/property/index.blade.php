@@ -51,5 +51,31 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><!-- container -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-2">
+                                Recent Rental Estimates
+                            </div>
+                            <div class="col-md-2 pull-right">
+                                {{ link_to_route('rentalEstimate.create', "Create New Estimate") }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        @foreach($rentalEstimates as $rentalEstimate)
+                            <div class="col-lg-12">
+                                <p>{!! $rentalEstimate->name !!}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- container -->
 @endsection
