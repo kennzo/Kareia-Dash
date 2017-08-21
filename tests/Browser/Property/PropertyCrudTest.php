@@ -7,6 +7,13 @@ use Tests\DuskTestCase;
 
 class PropertyCrudTest extends DuskTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $this->runDatabaseMigrations();
+        $this->seed(DatabaseSeeder::class);
+    }
+
     /**
      * Test creating a property.
      *
@@ -14,16 +21,12 @@ class PropertyCrudTest extends DuskTestCase
      */
     public function testCrudProperty()
     {
-        $this->seed(DatabaseSeeder::class);
-
         $this->browse(function ($browser) {
-            // Login
-            $browser->visit('/login')
-                ->type('email', 'kenneth.sok@gmail.com')
-                ->type('password', 'secret')
-                ->press('Login')
-                ->assertSee('You are logged in!')
+            // Login as non admin
+            $browser->loginAs(2)
+                ->visit('home')
                 ->clickLink("Go here for your properties.");
+
             // Create a Property
             $browser->clickLink("Create Property")
                 ->assertSee("Create Property")
@@ -52,25 +55,22 @@ class PropertyCrudTest extends DuskTestCase
                 ->assertDontSee("12345 Main St.");
 
             // Delete a Property
-            $browser->clickLink("Delete");
+            $browser->press("Delete");
             $browser->acceptDialog()
                 ->assertDontSee("54321 2nd St.");
-
-            // Logout
-            $browser->clickLink('Kenneth Sok');
-            $browser->clickLink('Logout');
-            $browser->assertSee("Kareia-Dashboard");
         });
     }
 
+    /**
+     * Verifies that when trying to improperly creating/editing properties,
+     * it will fail accordingly and show a failure message.
+     */
     public function testFailedCrudProperty()
     {
         $this->browse(function ($browser) {
-            $browser->visit('/login')
-                ->type('email', 'kenneth.sok@gmail.com')
-                ->type('password', 'secret')
-                ->press('Login')
-                ->assertSee('You are logged in!')
+            // Login as non admin
+            $browser->loginAs(2)
+                ->visit('home')
                 ->clickLink("Go here for your properties.");
             // Create a Property
             $browser->clickLink("Create Property")
@@ -82,11 +82,35 @@ class PropertyCrudTest extends DuskTestCase
                 ->assertSee("The state id field is required.")
                 ->assertSee("The zip field is required.");
             // Edit a Property
-            $browser->visit('/property/1/edit')
+            $browser->visit('/property/4/edit')
                 ->type("street_address", "")
                 ->press("Edit Property")
                 ->assertSee("Oops! There were some errors:")
                 ->assertSee("The street address field is required.");
+        });
+    }
+
+    public function testOnlyAccessPropertiesYouCreated()
+    {
+        $this->browse(function ($browser) {
+            // Login as non admin
+            $browser->loginAs(2)
+                ->visit('home')
+                ->clickLink("Go here for your properties.");
+
+            // Should be able to see your own property
+            $browser->visit('property/4')
+                ->assertSee("Property Information");
+
+            // Should not be able to access someone else's property
+            // show
+            $browser->visit('property/1')
+                ->assertDontSee("PropertyInformation")
+                ->assertSee("Properties")
+                // edit
+                ->visit('property/1/edit')
+                ->assertDontSee("PropertyInformation")
+                ->assertSee("Properties");
         });
     }
 }

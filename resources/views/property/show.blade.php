@@ -3,19 +3,19 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Property Information:
                     </div>
                     <div class="panel-heading">
-                        {{ link_to_route('property.edit', "Edit", ['id' => $property->id]) }} |
-                        {{ link_to_route(
-                            'property.destroy',
-                            "Delete",
-                            ['id' => $property->id],
-                            ['onclick' => "return confirm('Are you sure?')"]) }} |
-                        {{ link_to_route('properties', "Back to All Properties") }}
+                        <div class="pull-right">
+                            @include('property.include.destroyButton')
+                        </div>
+                        <div class="pull-right">
+                            @include('property.include.editButton')
+                        </div>
+                        {{ link_to_route('property.index', "Back to All Properties") }}
                     </div>
                     <div class="panel-body">
                         <div class="well">
@@ -26,4 +26,7 @@
             </div>
         </div>
     </div>
+    <!-- Rental Estimate area -->
+    @include('rentalEstimate.propertyIndex')
+    <!-- End Rental Estimate area -->
 @endsection

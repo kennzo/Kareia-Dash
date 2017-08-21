@@ -3,12 +3,20 @@
 namespace App\Models\Estimates\RentalEstimate;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laracasts\Presenter\PresentableTrait;
 
 class RentalEstimate extends Model
 {
+    use SoftDeletes;
+    use PresentableTrait;
+
+    protected $presenter = RentalEstimatePresenter::class;
+
     protected $fillable = [
         'property_id',
         'name',
+        'description',
         'arv',
         'purchase_price',
         'repairs',
@@ -20,6 +28,7 @@ class RentalEstimate extends Model
         'other_income',
         'annual_taxes',
         'insurance',
+        'hoa_term',
         'hoa',
         'use_property_management',
         'property_management_fee',

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">Edit Property</div>
                     <div class="panel-body">
@@ -16,7 +16,7 @@
                                     'method' => 'PATCH',
                                     'action' => [
                                         'PropertyController@update',
-                                        $property->id
+                                        $property
                                     ],
                                 ]) !!}
                             @include('_forms.property-input', ['submitButtonText' => 'Edit Property'])

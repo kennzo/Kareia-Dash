@@ -22,11 +22,11 @@ class Property
         // todo: Later, add logic to check that property has been shared with user or not.
         // That property will be viewable but not editable
 
-        $propertyId = $request->route()->parameter('id');
-        $userId = PropertyModel::find($propertyId)->user_id;
+        $property = $request->route()->parameter('property');
+        $userId = $property->user_id;
 
         if($userId != Auth::getUser()->getAuthIdentifier()) {
-            return redirect()->route('properties');
+            return redirect()->route('property.index');
         }
 
         return $next($request);

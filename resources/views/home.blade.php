@@ -16,7 +16,7 @@
                 <div class="panel-heading">Properties</div>
 
                 <div class="panel-body">
-                    <a href="{{ route('properties') }}">Go here for your properties.</a>
+                    <a href="{{ route('property.index') }}">Go here for your properties.</a>
                 </div>
             </div>
 

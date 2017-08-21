@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estimates\RentalEstimate\RentalEstimate;
 use App\Models\Property\Property;
 use Auth;
 use Illuminate\Http\Request;
@@ -15,6 +16,17 @@ class PropertyController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(
+            'property',
+            [
+                'only' => [
+                    'show',
+                    'edit',
+                    'update',
+                    'destroy'
+                ]
+            ]
+        );
     }
 
     /**
@@ -28,7 +40,10 @@ class PropertyController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view("property.index", compact('properties'));
+        // todo: Setup view for rentalEstimates such that clicking the link will take you straight to the property and show you the view.
+        $rentalEstimates = Auth::user()->rentalEstimates;
+
+        return view("property.index", compact('properties', 'rentalEstimates'));
     }
 
     /**
@@ -66,33 +81,30 @@ class PropertyController extends Controller
         $property->save();
 
         return redirect()
-            ->route('property', array('id' => $property->id))
+            ->route('property.show', array('id' => $property->id))
             ->with('message', 'Property successfully added!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Property $property
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Property $property)
     {
-        $property = Property::findOrFail($id);
-
-        return view("property.show", compact('property'));
+        $rentalEstimates = $property->rentalEstimates;
+        return view("property.show", compact('property', 'rentalEstimates'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Property $property
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Property $property)
     {
-        $property = Property::findOrFail($id);
-
         return view("property.edit", compact('property'));
     }
 
@@ -100,33 +112,39 @@ class PropertyController extends Controller
      * Update the specified resource in storage.
      *
      * @param PropertyRequest|Request $request
-     * @param  int $id
+     * @param Property $property
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function update(PropertyRequest $request, $id)
+    public function update(PropertyRequest $request, Property $property)
     {
         /** @var Property $property */
-        $property = Property::findOrFail($id);
         $input = $request->all();
         $property->update($input);
 
-        return redirect()->route('property', ['id' => $id])
+        return redirect()->route('property.show', ['property' => $property])
             ->with(['message' => 'Property updated!']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Property $property
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Property $property)
     {
-        /** @var Property $property */
-        $property = Property::findOrFail($id);
+        // Cascade the delete to all rentalEstimates that belong to a property
+        $rentalEstimates = $property->rentalEstimates;
+        /** @var RentalEstimate $rentalEstimate */
+        foreach ($rentalEstimates as $rentalEstimate) {
+            $rentalEstimate->delete();
+        }
+
         $property->delete();
 
-        return redirect('properties')
+        return redirect()->route('property.index')
             ->with(['message' => 'Property deleted!']);
     }
 }

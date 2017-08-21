@@ -8,7 +8,7 @@
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="{{ url('/home') }}">Home</a>
-    <a href="{{ url('/properties') }}">Properties</a>
+    <a href="{{ url('/property') }}">Properties</a>
     <a href="#">Calculators</a>
     <a href="#">Settings</a>
     <a href="#">Profile</a>
