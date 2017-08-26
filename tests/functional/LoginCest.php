@@ -1,7 +1,7 @@
 <?php
 
 
-class LogOrRegisterCest
+class LoginCest
 {
     public function _before(FunctionalTester $I)
     {
