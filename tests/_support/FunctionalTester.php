@@ -23,4 +23,21 @@ class FunctionalTester extends \Codeception\Actor
    /**
     * Define custom actions here
     */
+
+    /**
+     * Login as user.
+     *
+     * @param $name
+     * @param $password
+     */
+    public function login($name, $password)
+    {
+        $I = $this;
+        $I->amOnPage('/login');
+        $I->submitForm('form', [
+            'email' => $name,
+            'password' => $password
+        ]);
+        $I->see("You are logged in!");
+    }
 }
