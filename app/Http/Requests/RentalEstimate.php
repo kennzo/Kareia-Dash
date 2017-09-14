@@ -25,6 +25,7 @@ class RentalEstimate extends FormRequest
     public function rules()
     {
         return [
+            'property_id'               => ['required', 'integer'],
             'name'                      => ['required', 'string'],
             'description'               => ['nullable', 'string'],
             'arv'                       => ['nullable', 'numeric'],

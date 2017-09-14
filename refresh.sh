@@ -160,12 +160,6 @@ echo "Creating PHPStorm IDE helper file..."
 php artisan ide-helper:generate
 php artisan ide-helper:meta
 
-#echo "Starting up Xvfb for Laravel Dusk..."
-#Xvfb -ac :0 -screen 0 1280x1024x16 &
-
-#echo "Disable verbose logging..."
-#/usr/bin/Xvfb :99 -ac -screen 0 1280x1024x16 2>/dev/null 1>&2 &
-
 ##
 # Hooray!
 ##
