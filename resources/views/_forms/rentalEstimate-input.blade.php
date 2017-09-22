@@ -248,15 +248,4 @@
     </div>
 
     <br/>
-
-    <div class='form-group'>
-        <div class="col-lg-8 col-lg-offset-2">
-            {!! Form::submit($submitButtonText, ['class' => 'btn btn-lg btn-info pull-right']) !!}
-            @if ($showDeleteButton)
-            <div class="pull-right">
-                @include('rentalEstimate.include.destroyButton')
-            </div>
-            @endif
-        </div>
-    </div>
 </fieldset>
