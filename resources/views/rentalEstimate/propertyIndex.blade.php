@@ -50,7 +50,7 @@
                                     @include("_forms.rentalEstimate-input")
                                     <div class='form-group'>
                                         <div class="col-lg-8 col-lg-offset-2">
-                                            {!! Form::submit('Save Estimate', ['class' => 'btn btn-lg btn-info pull-right']) !!}
+                                        {!! Form::submit('Save Estimate', ['class' => 'btn btn-lg btn-info pull-right']) !!}
                                             {!! Form::close() !!}
                                             <div class="pull-right">
                                                 @include('rentalEstimate.include.destroyButton')

@@ -19,7 +19,12 @@
                             @else
                                 @include("_forms.userProperties", ['properties' => $propertiesArray])
                             @endif
-                            @include("_forms.rentalEstimate-input", ['submitButtonText' => 'Add New Estimate', 'showDeleteButton' => false])
+                            @include("_forms.rentalEstimate-input")
+                            <div class='form-group'>
+                                <div class="col-lg-8 col-lg-offset-2">
+                                    {!! Form::submit('Save Estimate', ['class' => 'btn btn-lg btn-info pull-right']) !!}
+                                </div>
+                            </div>
                             {!! Form::close() !!}
                         </div>
                     </div>
