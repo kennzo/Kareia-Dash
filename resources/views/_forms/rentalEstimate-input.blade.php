@@ -1,7 +1,7 @@
 <fieldset>
     <div class="well">
         <div class='form-group'>
-            {!! Form::label('name', 'Name', ['class' => 'col-lg-2 control-label']) !!}
+            {!! Form::label('name', 'Name *', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-8">
                 {!! Form::text(
                     'name',
@@ -35,7 +35,7 @@
         </div>
 
         <div class='form-group'>
-            {!! Form::label('purchase_price', 'Purchase Price', ['class' => 'col-lg-2 control-label']) !!}
+            {!! Form::label('purchase_price', 'Purchase Price *', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-8 input-group">
                 <span class="input-group-addon">$</span>
                 {!! Form::number(
@@ -96,7 +96,7 @@
                     'term',
                     isset($rentalEstimate)? $rentalEstimate->term : null,
                     ['class' => 'form-control']) !!}
-                <span class = "input-group-addon">
+                <span class="input-group-addon">
                     {!! Form::select(
                         'time_units',
                         [
@@ -115,7 +115,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class='form-group'>
-                    {!! Form::label('rental_arv', 'Rental ARV:', ['class' => 'col-md-5 control-label']) !!}
+                    {!! Form::label('rental_arv', 'Rental ARV *:', ['class' => 'col-md-5 control-label']) !!}
                     <div class="col-md-7 input-group">
                         <span class="input-group-addon">$</span>
                         {!! Form::number(
@@ -179,7 +179,7 @@
                     'hoa',
                     isset($rentalEstimate)? $rentalEstimate->hoa : null,
                     ['class' => 'form-control']) !!}
-                <span class = "input-group-addon">
+                <span class="input-group-addon">
                     {!! Form::select(
                         'hoa_term',
                         [
@@ -248,15 +248,4 @@
     </div>
 
     <br/>
-
-    <div class='form-group'>
-        <div class="col-lg-8 col-lg-offset-2">
-            {!! Form::submit($submitButtonText, ['class' => 'btn btn-lg btn-info pull-right']) !!}
-            @if ($showDeleteButton)
-            <div class="pull-right">
-                @include('rentalEstimate.include.destroyButton')
-            </div>
-            @endif
-        </div>
-    </div>
 </fieldset>

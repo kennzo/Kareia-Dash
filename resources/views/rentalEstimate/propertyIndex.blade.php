@@ -12,7 +12,10 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#create_rental_estimate">Info</a></li>
                         @foreach($rentalEstimates as $rentalEstimate)
-                            <li><a data-toggle="tab" href="#{{ $rentalEstimate->present()->convertNameToCssId }}">{{ $rentalEstimate->name }}</a></li>
+                            <li>
+                                <a data-toggle="tab"
+                                   href="#{{ $rentalEstimate->present()->convertNameToCssId }}">{{ $rentalEstimate->name }}</a>
+                            </li>
                         @endforeach
                     </ul>
 
@@ -20,9 +23,12 @@
                         <div id="create_rental_estimate" class="tab-pane fade in active">
                             <br/>
                             <h4>Information Paragraph</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua.
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat. Duis aute irure
+                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non
                                 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </div>
                         @foreach($rentalEstimates as $rentalEstimate)
@@ -32,7 +38,7 @@
                                     {!! Form::model(
                                         $rentalEstimate,
                                         [
-                                            'id' => 'form-rental-estimate-update',
+                                            'id' => 'form-rental-estimate-update-' . $rentalEstimate->id,
                                             'class' => 'form-horizontal',
                                             'method' => 'PATCH',
                                             'action' => [
@@ -40,7 +46,19 @@
                                                 $rentalEstimate
                                             ],
                                         ]) !!}
-                                        @include("_forms.rentalEstimate-input", ['submitButtonText' => 'Save Estimate', 'showDeleteButton' => true])
+                                    {!! Form::hidden('property_id', $property->id) !!}
+                                    @include("_forms.rentalEstimate-input")
+                                    <div class='form-group'>
+                                        <div class="col-lg-8 col-lg-offset-2">
+                                            {!! Form::submit('Save Estimate', [
+                                                    'id' => 'save-estimate-' . $rentalEstimate->id,
+                                                    'class' => 'btn btn-lg btn-info pull-right'
+                                                    ]) !!}
+                                            {{--<div class="pull-right">--}}
+                                            {{--@include('rentalEstimate.include.destroyButton')--}}
+                                            {{--</div>--}}
+                                        </div>
+                                    </div>
                                     {!! Form::close() !!}
                                 </div>
                             </div>
