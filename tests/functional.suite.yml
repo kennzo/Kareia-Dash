@@ -10,7 +10,16 @@ modules:
     enabled:
         - Laravel5
         - \Helper\Functional
+        - Db:
+           dsn: 'pgsql:host=localhost;dbname=kareia-dash_testing'
+           user: 'homestead'
+           password: 'secret'
+           dump: 'tests/_data/db_backup.dump'
+           populate: false # run populator before all tests
+           cleanup: false # run populator before each test
+           #populator: 'pg_restore -u $user -h $host -D $dbname < $dump'
     config:
         Laravel5:
             environment_file: .env.testing
             run_database_migrations: true
+            cleanup: false

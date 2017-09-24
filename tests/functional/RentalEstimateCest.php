@@ -14,19 +14,16 @@ class RentalEstimateCest
             'purchase_price' => 100000,
             'rental_arv'     => 1000,
         ];
-
-        $I->login('non.admin@example.com', 'secret');
-        $I->amOnPage('rentalEstimate/create');
-    }
-
-    public function _after(FunctionalTester $I)
-    {
     }
 
     // CREATE - fail with no parameters filled
     public function tryToCreateRentalEstimate(FunctionalTester $I)
     {
+        $I->login('non.admin@example.com', 'secret');
+        $I->amOnPage('rentalEstimate/create');
         $I->submitForm('#form-rental-estimate-create', []);
+
+        // Assertions
         $I->see("The property id field is required.");
         $I->see("The name field is required.");
         $I->see("The purchase price field is required.");
@@ -60,7 +57,11 @@ class RentalEstimateCest
             'monthly_repairs'         => 'abc',
         ];
 
+        $I->login('non.admin@example.com', 'secret');
+        $I->amOnPage('rentalEstimate/create');
         $I->submitForm('#form-rental-estimate-create', $badRentalEstimateAttributes);
+
+        // Assertions
         $I->see('The property id must be an integer.');
         $I->see('The arv must be a number.');
         $I->see('The purchase price must be a number.');
@@ -82,17 +83,45 @@ class RentalEstimateCest
         $I->see('The monthly repairs must be a number.');
     }
 
-    // Success - Create with minimum requirements
+    // Success - CRUD with minimum requirements for brand new property
     public function successfullyCreatePropertyWithMinimumReqs(FunctionalTester $I)
     {
-        $propertyId = $this->minimumRentalEstimateAttributes['property_id'];
+//        $I->login('non.admin@example.com', 'secret');
+//        $I->amOnPage('rentalEstimate/create');
+//        $propertyId = $this->minimumRentalEstimateAttributes['property_id'];
+
+        $I->createNewUserAndLogin();
+        $propertyId = $I->createPropertyForUser();
+        $I->click('Back to All Properties');
+        $I->amOnPage('rentalEstimate/create');
+        $this->minimumRentalEstimateAttributes['property_id'] = $propertyId;
+
+        // Create rental estimate
         $I->submitForm('#form-rental-estimate-create', $this->minimumRentalEstimateAttributes);
+        $I->seeCurrentUrlMatches("/\/property\/$propertyId/");
+
+        /**
+         * Read
+         *
+         * Only one estimate available here. The rental estimate view is available but hidden until you
+         * click on the link. Would need Javascript to test out the different tabs in acceptance tests.
+         */
         $I->see('Estimate successfully added!');
         $I->see('Non Admin Example Name');
-        $I->seeCurrentUrlMatches("/\/property\/$propertyId/");
+        $I->seeInField('purchase_price', '100000.00');
+        $I->seeInField('rental_arv', '1000.00');
+
+        // Update
+        $I->fillField('other_income', 200);
+        $latestRentalEstimateId = $I->grabLatestRentalEstimateId($propertyId);
+        $I->click("input#save-estimate-$latestRentalEstimateId");
+        $I->see('Rental Estimate updated!');
+        $I->seeInField('other_income', '200.00');
+
+        // Delete (not implemented yet)
     }
 
-    // Success - Create with all fields
+    // Success - Create with all field
     public function successfullyCreatePropertyWithAllFields(FunctionalTester $I)
     {
         $fullRentalEstimateAttributes = array_merge($this->minimumRentalEstimateAttributes, [
@@ -116,20 +145,12 @@ class RentalEstimateCest
         ]);
 
         $propertyId = $this->minimumRentalEstimateAttributes['property_id'];
+        $I->login('non.admin@example.com', 'secret');
+        $I->amOnPage('rentalEstimate/create');
         $I->submitForm('#form-rental-estimate-create', $fullRentalEstimateAttributes);
+
         $I->see('Estimate successfully added!');
         $I->see('Non Admin Example Name');
         $I->seeCurrentUrlMatches("/\/property\/$propertyId/");
-    }
-
-    // Cannot create with wrong property ID. Users will not really be able to do this but putting
-    // in test just in case.
-    public function failCreatePropertyWithWrongPropertyId(FunctionalTester $I)
-    {
-        // Change property Id to be owned by admin
-        $this->minimumRentalEstimateAttributes['property_id'] = 1;
-        $I->submitForm('#form-rental-estimate-create', $this->minimumRentalEstimateAttributes);
-        $I->dontSee('Estimate successfully added!');
-        $I->dontSee('Non Admin Example Name');
     }
 }

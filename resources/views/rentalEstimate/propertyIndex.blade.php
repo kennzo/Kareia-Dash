@@ -38,7 +38,7 @@
                                     {!! Form::model(
                                         $rentalEstimate,
                                         [
-                                            'id' => 'form-rental-estimate-update',
+                                            'id' => 'form-rental-estimate-update-' . $rentalEstimate->id,
                                             'class' => 'form-horizontal',
                                             'method' => 'PATCH',
                                             'action' => [
@@ -50,13 +50,16 @@
                                     @include("_forms.rentalEstimate-input")
                                     <div class='form-group'>
                                         <div class="col-lg-8 col-lg-offset-2">
-                                        {!! Form::submit('Save Estimate', ['class' => 'btn btn-lg btn-info pull-right']) !!}
-                                            {!! Form::close() !!}
-                                            <div class="pull-right">
-                                                @include('rentalEstimate.include.destroyButton')
-                                            </div>
+                                            {!! Form::submit('Save Estimate', [
+                                                    'id' => 'save-estimate-' . $rentalEstimate->id,
+                                                    'class' => 'btn btn-lg btn-info pull-right'
+                                                    ]) !!}
+                                            {{--<div class="pull-right">--}}
+                                            {{--@include('rentalEstimate.include.destroyButton')--}}
+                                            {{--</div>--}}
                                         </div>
                                     </div>
+                                    {!! Form::close() !!}
                                 </div>
                             </div>
                         @endforeach
